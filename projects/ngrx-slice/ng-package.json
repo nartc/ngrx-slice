@@ -5,7 +5,12 @@
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
       "immer": "immer",
-      "ngrx-immer": "ngrx-immer"
+      "ngrx-immer/store": "ngrx-immer/store",
+      "@ngrx/store": "@ngrx/store"
     }
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "immer",
+    "ngrx-immer"
+  ]
 }
