@@ -51,7 +51,7 @@ export interface SliceOptions<
 }
 
 export type SliceSelector<
-  AppState extends Record<string, unknown>,
+  AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName]
 > = {
@@ -61,18 +61,16 @@ export type SliceSelector<
   >;
 };
 
-export type NestedSelectors<
-  AppState extends Record<string, unknown>,
-  SliceState
-> = SliceState extends Primitive | unknown[] | Date
-  ? Record<string, never>
-  : {
-      [K in keyof NonOptional<SliceState> &
-        string as `select${Capitalize<K>}`]: MemoizedSelector<
-        AppState,
-        SliceState[K]
-      >;
-    };
+export type NestedSelectors<AppState extends Record<string, any>, SliceState> =
+  SliceState extends Primitive | unknown[] | Date
+    ? Record<string, never>
+    : {
+        [K in keyof NonOptional<SliceState> &
+          string as `select${Capitalize<K>}`]: MemoizedSelector<
+          AppState,
+          SliceState[K]
+        >;
+      };
 
 export type SliceActions<
   SliceState,
@@ -105,7 +103,7 @@ export type ActionCreatorForCaseReducer<SliceState, Reducer> =
   };
 
 export interface Slice<
-  AppState extends Record<string, unknown>,
+  AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
