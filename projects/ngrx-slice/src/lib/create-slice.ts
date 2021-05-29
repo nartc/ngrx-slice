@@ -23,10 +23,10 @@ export function noopReducer<SliceState>(): CaseReducer<SliceState> {
   return (state) => state;
 }
 
-export function typedNoopReducer<SliceState, ActionProps = unknown>(): (
-  state: Draft<SliceState>,
-  action: PayloadAction<ActionProps>
-) => void {
+export function typedNoopReducer<
+  SliceState,
+  ActionProps extends Record<string, unknown>
+>(): (state: Draft<SliceState>, action: PayloadAction<ActionProps>) => void {
   return (state, _) => state;
 }
 
