@@ -19,13 +19,20 @@ export interface SliceActionNameGetter {
   (featureName: string, actionName: string): string;
 }
 
-export type PayloadAction<Payload extends Record<string, any> = any> = {
-  [PayloadKey in keyof Payload]: Payload[PayloadKey];
+export declare type PayloadAction<
+  Payload extends Record<string, unknown> = any
+> = {
+  [PayloadKey in keyof Payload & string]: Payload[PayloadKey];
 } &
-  Action & { _payload: Payload };
+  Action & {
+    _payload: Payload;
+  };
 
-export interface CaseReducer<SliceState = unknown> {
-  (state: Draft<SliceState>, action: PayloadAction): void;
+export interface CaseReducer<
+  SliceState = unknown,
+  CaseAction extends PayloadAction = any
+> {
+  (state: Draft<SliceState>, action: CaseAction): void;
 }
 
 export interface AsyncCaseReducer<SliceState = unknown> {
@@ -96,7 +103,11 @@ export type ActionCreatorForCaseReducer<SliceState, Reducer> =
     action: infer ReducerAction
   ) => SliceState
     ? ReducerAction extends { _payload: infer ActionPayload }
-      ? (payload: ActionPayload) => PayloadAction<ActionPayload>
+      ? (
+          payload: ActionPayload
+        ) => ActionPayload extends Record<string, unknown>
+          ? PayloadAction<ActionPayload>
+          : PayloadAction
       : () => PayloadAction<never>
     : () => PayloadAction<never>) & {
     type: string;
