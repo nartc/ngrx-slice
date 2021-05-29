@@ -19,7 +19,7 @@ export interface SliceActionNameGetter {
   (featureName: string, actionName: string): string;
 }
 
-export type PayloadAction<Payload = Record<string, unknown>> = {
+export type PayloadAction<Payload = Record<string, any>> = {
   [PayloadKey in keyof Payload]: Payload[PayloadKey];
 } &
   Action & { _payload: Payload };
