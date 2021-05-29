@@ -4,7 +4,7 @@ import type { NestedSelectors } from './typings';
 import { capitalize, isDictionary } from './utils';
 
 export function createSliceSelectors<
-  AppState extends Record<string, unknown>,
+  AppState extends Record<string, any>,
   SliceState
 >(
   initialState: SliceState,

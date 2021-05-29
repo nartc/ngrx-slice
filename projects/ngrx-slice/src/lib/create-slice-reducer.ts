@@ -9,7 +9,7 @@ import type {
 } from './typings';
 
 export function createSliceReducer<
-  AppState extends Record<string, unknown>,
+  AppState extends Record<string, any>,
   SliceName extends keyof AppState & string = keyof AppState & string,
   SliceState extends AppState[SliceName] = AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
