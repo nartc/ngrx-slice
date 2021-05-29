@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^12.0.2",
-    "@angular/core": "^12.0.2"
+    "@angular/core": "^12.0.2",
+    "@ngrx/store": "^12.0.0"
   },
   "dependencies": {
     "immer": "^9.0.2",
