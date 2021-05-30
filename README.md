@@ -1,8 +1,29 @@
 # ngrx-slice
 
 `ngrx-slice` is a POC that intends to provide the same functionalities
-that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) provides. It is meant to be **
-opinionated**.
+that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) provides. It is meant to be **opinionated**.
+
+## Peer Dependencies
+
+<table>
+  <thead>
+    <tr>
+      <th>Angular</th>
+      <th>NgRX</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>12+</td>
+      <td>12+</td>
+    </tr>
+    <tr>
+      <td>11+</td>
+      <td>11+</td>
+    </tr>
+    <td colspan="2">No support for Angular < 11 because of TS version</td>
+  </tbody>
+</table>
 
 ## Features
 
@@ -177,22 +198,56 @@ export { CounterActions, CounterSelectors, counterFeature };
 export class CounterModule {}
 ```
 
+### Noop Reducers
+
+Not all Actions need to be handled by Reducers. Sometimes, we have some Actions as triggers for Side Effects. For these cases, `ngrx-slice` provides two **Noop Reducers**
+
+- `noopReducer<SliceState>()`: This reducer is the same as `(state: SliceState) => void` which does nothing rather than making itself available as a generated actions.
+- `typedNoopReducers<SliceState, ActionPayload>()`: This reducer also does not change State but allows `ngrx-slice` to generate the Action with the correct type for the `payload`
+
+For example:
+
+```ts
+const {
+  actions: AuthActions,
+  selectors: AuthSelectors,
+  ...authFeature
+} = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    login: {
+        trigger: typedNoopReducer<AuthState, {username: string, password: string}>(),
+        success: /*...success reducer */
+    },
+    logout: {
+        trigger: noopReducer<AuthState>(),
+        success: /*...success reducer */
+    }
+  },
+});
+
+// login.trigger() and logout.trigger() will not change the State
+AuthActions.login.trigger({username, password});
+AuthActions.logout.trigger();
+```
+
 ### Action Type
 
 By default, all generated actions will have the following type: `[featureName_in_capitalize]: actionName` and all generated async actions will have the same type with `success`, `failure`, and `trigger` prefixed to respective actions. For example:
 
 ```ts
-CounterActions.increment() // {type: '[Counter] increment'}
-CounterActions.decrement() // {type: '[Counter] decrement'}
-CounterActions.double() // {type: '[Counter] double'}
-CounterActions.multiplyBy.trigger() // {type: '[Counter] multiplyBy trigger'}
-CounterActions.multiplyBy.success() // {type: '[Counter] multiplyBy success'}
+CounterActions.increment(); // {type: '[Counter] increment'}
+CounterActions.decrement(); // {type: '[Counter] decrement'}
+CounterActions.double(); // {type: '[Counter] double'}
+CounterActions.multiplyBy.trigger(); // {type: '[Counter] multiplyBy trigger'}
+CounterActions.multiplyBy.success(); // {type: '[Counter] multiplyBy success'}
 ```
 
 This behavior is customizable with `sliceActionNameGetter` that `createSlice` accepts. `sliceActionNameGetter` has the following signature:
 
 ```ts
-(featureName: string, actionName: string) => string
+(featureName: string, actionName: string) => string;
 ```
 
 ### External Actions
