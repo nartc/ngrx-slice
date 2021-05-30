@@ -1,6 +1,6 @@
 {
   "name": "ngrx-slice",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "license": "MIT",
   "description": "POC plugin of createSlice for NgRX",
   "keywords": ["ngrx", "redux toolkit", "create slice", "typescript"],
