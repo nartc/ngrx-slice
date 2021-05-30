@@ -1,6 +1,17 @@
 {
   "name": "ngrx-slice",
-  "version": "0.0.8",
+  "version": "0.0.9",
+  "license": "MIT",
+  "description": "POC plugin of createSlice for NgRX",
+  "keywords": ["ngrx", "redux toolkit", "create slice", "typescript"],
+  "author": {
+    "name": "Chau Tran",
+    "url": "https://nartc.me"
+  },
+  "repository": {
+    "url": "https://github.com/nartc/ngrx-slice",
+    "type": "git"
+  },
   "peerDependencies": {
     "@angular/common": "^12.0.2",
     "@angular/core": "^12.0.2",
