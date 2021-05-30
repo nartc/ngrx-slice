@@ -1,5 +1,7 @@
-import { ActionCreator, createReducer, on } from '@ngrx/store';
-import { immerOn, ImmerOnReducer } from 'ngrx-immer/store';
+import type { ActionCreator, ActionReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+import type { ImmerOnReducer } from 'ngrx-immer/store';
+import { immerOn } from 'ngrx-immer/store';
 import type {
   CaseReducer,
   SliceActionNameGetter,
@@ -23,13 +25,13 @@ export function createSliceReducer<
     SliceState,
     CaseReducers
   >['extraReducers']
-) {
+): ActionReducer<SliceState> {
   const reducerArgs = [] as Array<ReturnType<typeof on>>;
   const extra: Array<ReturnType<typeof on>> = (extraReducers || []) as Array<
     ReturnType<typeof on>
   >;
 
-  Object.entries(reducers).forEach(([reducerKey, reducer]) => {
+  for (const [reducerKey, reducer] of Object.entries(reducers)) {
     const typeOfReducer = typeof reducer;
 
     if (typeOfReducer === 'function') {
@@ -39,22 +41,23 @@ export function createSliceReducer<
           reducer as unknown as ImmerOnReducer<any, any>
         )
       );
-    } else if (typeOfReducer === 'object') {
-      ['success', 'failure', 'trigger'].forEach((asyncKey) => {
-        const asyncReducer = (
-          reducer as unknown as Record<string, CaseReducer>
-        )[asyncKey];
-        reducerArgs.push(
-          immerOn(
-            (actions[reducerKey] as unknown as Record<string, ActionCreator>)[
-              asyncKey
-            ],
-            asyncReducer as unknown as ImmerOnReducer<any, any>
-          )
-        );
-      });
+      continue;
     }
-  });
+
+    ['success', 'failure', 'trigger'].forEach((asyncKey) => {
+      const asyncReducer = (reducer as unknown as Record<string, CaseReducer>)[
+        asyncKey
+      ];
+      reducerArgs.push(
+        immerOn(
+          (actions[reducerKey] as unknown as Record<string, ActionCreator>)[
+            asyncKey
+          ],
+          asyncReducer as unknown as ImmerOnReducer<any, any>
+        )
+      );
+    });
+  }
 
   return createReducer(initialState, ...(reducerArgs.concat(extra) as any));
 }

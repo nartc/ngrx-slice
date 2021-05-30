@@ -17,19 +17,21 @@ export function createSliceActions<
   const actions: Record<string, ActionCreator | Record<string, ActionCreator>> =
     {};
 
-  Object.entries(reducers).forEach(([reducerKey, reducerValue]) => {
+  for (const [reducerKey, reducerValue] of Object.entries(reducers)) {
     const typeOfReducer = typeof reducerValue;
     const sliceActionName = sliceActionNameGetter(featureName, reducerKey);
+
     if (typeOfReducer === 'function') {
       actions[reducerKey] = createAction(sliceActionName, props<any>());
-    } else if (typeOfReducer === 'object') {
-      actions[reducerKey] = {};
-      ['success', 'failure', 'trigger'].forEach((asyncKey) => {
-        (actions[reducerKey] as Record<string, ActionCreator>)[asyncKey] =
-          createAction(`${sliceActionName} ${asyncKey}`, props<any>());
-      });
+      continue;
     }
-  });
+
+    actions[reducerKey] = {};
+    ['success', 'failure', 'trigger'].forEach((asyncKey) => {
+      (actions[reducerKey] as Record<string, ActionCreator>)[asyncKey] =
+        createAction(`${sliceActionName} ${asyncKey}`, props<any>());
+    });
+  }
 
   return actions as SliceActions<SliceState, CaseReducers>;
 }

@@ -1,5 +1,6 @@
-import { createSlice, typedNoopReducer } from './create-slice';
+import { createSlice, noopReducer, typedNoopReducer } from './create-slice';
 import { PayloadAction } from './typings';
+import { capitalize } from './utils';
 
 interface CounterState {
   value: number;
@@ -13,26 +14,67 @@ const initialState: CounterState = {
   value: 0,
 };
 
-describe(createSlice.name, () => {
-  const { actions } = createSlice({
-    name: 'counter',
-    initialState,
-    reducers: {
-      increment: (state) => {
-        state.value++;
-      },
-      decrement: (state) => {
-        state.value--;
-      },
-      multiplyBy: {
-        success: (state, action: PayloadAction<{ value: number }>) => {
-          state.value = action.value;
-        },
-        trigger: typedNoopReducer<CounterState, { multiplier: number }>(),
-      },
+const { actions, selectors, reducer, name } = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment: (state) => {
+      state.value++;
     },
+    decrement: (state) => {
+      state.value--;
+    },
+    multiplyBy: {
+      success: (state, action: PayloadAction<{ value: number }>) => {
+        state.value = action.value;
+      },
+      trigger: typedNoopReducer<CounterState, { multiplier: number }>(),
+    },
+  },
+});
+
+describe(createSlice.name, () => {
+  it('should return correct name', () => {
+    expect(name).toEqual('counter');
   });
 
-  actions.multiplyBy.success({ value: 123 });
-  actions.multiplyBy.trigger({ multiplier: 1 });
+  it('should return reducer', () => {
+    expect(reducer).toBeTruthy();
+  });
+
+  it('should return actions', () => {
+    expect(actions).toBeTruthy();
+  });
+
+  describe('selectors', () => {
+    it('should return selectors', () => {
+      expect(selectors).toBeTruthy();
+      expect(Object.keys(selectors).length).toEqual(4);
+    });
+
+    it('should selectors return correct values', () => {
+      expect(selectors.selectCounterState({ counter: initialState })).toEqual(
+        initialState
+      );
+
+      ['value', 'incremented', 'decremented'].forEach((key) => {
+        expect(
+          (selectors as any)[`select${capitalize(key)}`]({
+            counter: initialState,
+          })
+        ).toEqual((initialState as any)[key]);
+      });
+    });
+  });
+
+  it('should noop reducers not change state', () => {
+    const noop = noopReducer<CounterState>();
+    const typedNoop = typedNoopReducer<CounterState, { foo: 'foo' }>();
+
+    noop(initialState, actions.increment());
+    expect(initialState).toEqual({ value: 0, incremented: 0, decremented: 0 });
+
+    typedNoop(initialState, actions.increment());
+    expect(initialState).toEqual({ value: 0, incremented: 0, decremented: 0 });
+  });
 });

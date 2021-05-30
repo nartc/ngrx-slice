@@ -1,0 +1,40 @@
+import { createFeatureSelector } from '@ngrx/store';
+import { createSliceSelectors } from './create-slice-selectors';
+import { capitalize } from './utils';
+
+describe(createSliceSelectors.name, () => {
+  it('should create selectors', () => {
+    const initialState = {
+      count: 0,
+      increment: 0,
+      decrement: 0,
+    };
+
+    const featureSelector =
+      createFeatureSelector<typeof initialState>('counter');
+
+    const selectors = createSliceSelectors<
+      Record<string, any>,
+      typeof initialState
+    >(initialState, featureSelector);
+
+    expect(Object.keys(selectors).length).toEqual(3);
+    Object.keys(initialState).forEach((stateKey) => {
+      expect(
+        (selectors as Record<string, unknown>)[`select${capitalize(stateKey)}`]
+      ).toBeTruthy();
+    });
+  });
+
+  it('should return empty {} for empty state', () => {
+    const featureSelector = createFeatureSelector('counter');
+    const selectors = createSliceSelectors({}, featureSelector);
+    expect(Object.keys(selectors).length).toEqual(0);
+  });
+
+  it('should return empty {} for non object state', () => {
+    const featureSelector = createFeatureSelector('counter');
+    const selectors = createSliceSelectors(0, featureSelector);
+    expect(Object.keys(selectors).length).toEqual(0);
+  })
+});
