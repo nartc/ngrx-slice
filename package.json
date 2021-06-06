@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "npm run build && npm run scully -- --prod --scanRoutes",
     "build:lib": "ng build ngrx-slice",
     "copy-readme": "shx cp README.md projects/ngrx-slice",
     "watch": "ng build --watch --configuration development",
