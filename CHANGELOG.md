@@ -1,3 +1,14 @@
+### [1.0.1](https://github.com/nartc/ngrx-slice/compare/1.0.0...1.0.1) (2021-06-06)
+
+
+### Documentations
+
+* add docs application and taiga ui ([6451339](https://github.com/nartc/ngrx-slice/commit/645133961d3593313d832858aff7e6de14a09414))
+* add scully ([b8a23dc](https://github.com/nartc/ngrx-slice/commit/b8a23dc032842d24428c55bb8e17e58daf9f56bd))
+* adjust docs import ([7d435f1](https://github.com/nartc/ngrx-slice/commit/7d435f1343b780664dcbd3794ac255e8cbf4b8dc))
+* basic documentations added ([9cd410c](https://github.com/nartc/ngrx-slice/commit/9cd410c51970a8e533b335d5c152670b83151ae4))
+* finish docs ([8abb8dc](https://github.com/nartc/ngrx-slice/commit/8abb8dca60a069cd651c3ebb08a24172d4e8ae6e))
+
 ## 1.0.0 (2021-06-06)
 
 
