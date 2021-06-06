@@ -2,7 +2,7 @@
   "name": "ngrx-slice",
   "version": "0.1.0",
   "license": "MIT",
-  "description": "POC plugin of createSlice for NgRX",
+  "description": "createSlice plugin for NgRX",
   "keywords": ["ngrx", "redux toolkit", "create slice", "typescript"],
   "author": {
     "name": "Chau Tran",

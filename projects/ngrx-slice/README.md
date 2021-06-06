@@ -305,7 +305,7 @@ export interface SliceOptions<
   SliceName extends string,
   SliceState,
   CaseReducers extends SliceCaseReducers<SliceState>
-  > {
+> {
   name: SliceName;
   initialState: SliceState;
   reducers: CaseReducers;
@@ -318,7 +318,7 @@ export interface Slice<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-  > {
+> {
   name: SliceName;
   reducer: ActionReducer<SliceState>;
   actions: SliceActions<SliceState, CaseReducers>;
@@ -331,18 +331,18 @@ export declare function createSlice<
   SliceName extends keyof AppState & string = keyof AppState & string,
   SliceState extends AppState[SliceName] = AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
-  >({
-      name,
-      initialState,
-      reducers,
-      extraReducers,
-      sliceActionNameGetter,
-    }: SliceOptions<SliceName, SliceState, CaseReducers>): Slice<
+>({
+  name,
+  initialState,
+  reducers,
+  extraReducers,
+  sliceActionNameGetter,
+}: SliceOptions<SliceName, SliceState, CaseReducers>): Slice<
   AppState,
   SliceName,
   SliceState,
   CaseReducers
-  >;
+>;
 ```
 
 ## Mention
