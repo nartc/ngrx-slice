@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
-    "release": "dotenv release-it --"
+    "release": "dotenv release-it --",
+    "publish": "cd dist/ngrx-slice && npm publish"
   },
   "private": true,
   "dependencies": {
