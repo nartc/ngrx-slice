@@ -50,6 +50,6 @@
       "git add .",
       "git commit --amend --no-edit"
     ],
-    "after:bump": "npm run build"
+    "after:bump": "npm run build:lib"
   }
 }

@@ -85,7 +85,7 @@ import { CounterActions, CounterSelectors } from './counter.slice';
       <code>createSlice</code> makes use of <code>Immer</code> under the hood to
       provide simpler <strong>State Updates</strong> operations. Normally,
       <em>mutating</em> state is not allowed but as you notice, we
-      <strong>mutate</strong> our <code>CounterState</code> mutably with
+      <strong>mutate</strong> our <code>CounterState</code> with
       <code>state.value++</code>. This is all thanks to <code>Immer</code>. For
       more complex update patterns, please check out
       <a href="https://immerjs.github.io/immer/update-patterns/"

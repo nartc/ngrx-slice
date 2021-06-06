@@ -4,7 +4,11 @@ import { Component } from '@angular/core';
   selector: 'docs-root',
   template: `
     <!--The content below is only a placeholder and can be replaced.-->
-    <tui-doc-main></tui-doc-main>
+    <tui-doc-main>
+      <ng-container ngProjectAs="tuiDocHeader">
+        <a tuiLink class="link" href="https://github.com/nartc/ngrx-slice"> GitHub </a>
+      </ng-container>
+    </tui-doc-main>
   `,
   styles: [
     `
@@ -14,6 +18,10 @@ import { Component } from '@angular/core';
 
       :host ::ng-deep .tui-doc-content {
         margin-left: 0;
+      }
+
+      .link {
+        margin-left: 1rem;
       }
     `,
   ],
