@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ngrx-slice",
-    "build:docs": "ng build",
+    "build": "ng build",
+    "build:lib": "ng build ngrx-slice",
     "copy-readme": "shx cp README.md projects/ngrx-slice",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

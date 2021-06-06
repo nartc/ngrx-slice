@@ -21,8 +21,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "14"
-      - name: npm install
-        run: npm ci
       - uses: cmgriffing/scully-gh-pages-action@v9
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
