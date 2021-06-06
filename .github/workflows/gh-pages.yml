@@ -1,0 +1,29 @@
+# This workflow will deploy to GH Pages
+
+name: Deploy GH Pages
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: npm install
+        run: npm ci
+      - uses: cmgriffing/scully-gh-pages-action@v9
+        with:
+          access-token: ${{ secrets.ACCESS_TOKEN }}
+          deploy-branch: "gh-pages"
