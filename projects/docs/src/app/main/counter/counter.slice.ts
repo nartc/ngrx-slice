@@ -1,4 +1,4 @@
-import { createSlice } from 'ngrx-slice';
+import { createSlice } from '../../../../../ngrx-slice/src/public-api';
 import { initialState } from '../../shared/data-access-counter/counter.state';
 
 export const {
