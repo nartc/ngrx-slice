@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "prebuild": "shx cp README.md projects/ngrx-slice",
+    "copy-readme": "shx cp README.md projects/ngrx-slice",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",

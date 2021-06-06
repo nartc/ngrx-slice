@@ -1,6 +1,6 @@
 # ngrx-slice
 
-`ngrx-slice` is a POC that intends to provide the same functionalities
+`ngrx-slice` is a plugin that intends to provide the same functionalities
 that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) provides. It is meant to be **opinionated**.
 
 ## Peer Dependencies
@@ -34,8 +34,6 @@ that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) p
 - Utilize [Immer](https://immerjs.github.io/immer/) and [ngrx-immer](https://github.com/timdeschryver/ngrx-immer) under
   the hood for State updates
 - Customizable (partial) Actions' types
-
-> WARNING: Please be cautious when using this package as is is a POC.
 
 ## Installation
 
@@ -353,4 +351,4 @@ export declare function createSlice<
 
 ## Contribution
 
-Contributions are welcomed
+Contributions welcome

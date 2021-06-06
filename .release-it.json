@@ -43,5 +43,13 @@
   "github": {
     "release": true,
     "releaseName": "Release ${version}"
+  },
+  "hooks": {
+    "before:init": [
+      "npm run copy-readme",
+      "git add .",
+      "git commit --amend --no-edit"
+    ],
+    "after:bump": "npm run build"
   }
 }
