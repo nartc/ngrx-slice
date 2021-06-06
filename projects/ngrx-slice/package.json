@@ -1,9 +1,14 @@
 {
   "name": "ngrx-slice",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "createSlice plugin for NgRX",
-  "keywords": ["ngrx", "redux toolkit", "create slice", "typescript"],
+  "keywords": [
+    "ngrx",
+    "redux toolkit",
+    "create slice",
+    "typescript"
+  ],
   "author": {
     "name": "Chau Tran",
     "url": "https://nartc.me"
