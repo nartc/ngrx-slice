@@ -8,7 +8,8 @@
     "prebuild": "shx cp README.md projects/ngrx-slice",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage"
+    "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
+    "release": "release-it"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,8 @@
     "@angular-devkit/build-angular": "~12.0.3",
     "@angular/cli": "~12.0.3",
     "@angular/compiler-cli": "~12.0.3",
+    "@release-it/bumper": "^2.0.0",
+    "@release-it/conventional-changelog": "^2.0.1",
     "@types/jasmine": "~3.7.7",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.7.1",
@@ -41,6 +44,7 @@
     "karma-jasmine-html-reporter": "^1.6.0",
     "ng-packagr": "^12.0.3",
     "prettier": "2.3.1",
+    "release-it": "^14.7.0",
     "shx": "^0.3.3",
     "typescript": "~4.2.3"
   },
