@@ -9,12 +9,6 @@ import type { Draft } from 'immer';
 
 export type Primitive = string | number | bigint | boolean | null | undefined;
 
-export type RequiredKeys<T> = {
-  [K in keyof T]: {} extends { [P in K]: T[K] } ? never : K;
-}[keyof T];
-
-export type NonOptional<T> = Pick<T, RequiredKeys<T>>;
-
 export interface SliceActionNameGetter {
   (featureName: string, actionName: string): string;
 }
@@ -72,7 +66,7 @@ export type NestedSelectors<AppState extends Record<string, any>, SliceState> =
   SliceState extends Primitive | unknown[] | Date
     ? Record<string, never>
     : {
-        [K in keyof NonOptional<SliceState> &
+        [K in keyof SliceState &
           string as `select${Capitalize<K>}`]: MemoizedSelector<
           AppState,
           SliceState[K]
