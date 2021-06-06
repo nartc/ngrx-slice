@@ -15,6 +15,7 @@ import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
+import { ScullyLibModule } from '@scullyio/ng-lib';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { routes } from './app.routes';
     RouterModule.forRoot(routes),
     TuiDocMainModule,
     StoreModule.forRoot({}),
+    ScullyLibModule,
   ],
   providers: [
     {

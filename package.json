@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve docs",
-    "build": "ng build",
-    "build:docs": "ng build docs",
+    "start": "ng serve",
+    "build": "ng build ngrx-slice",
+    "build:docs": "ng build",
     "copy-readme": "shx cp README.md projects/ngrx-slice",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
     "release": "dotenv release-it --",
-    "publish": "cd dist/ngrx-slice && npm publish"
+    "publish": "cd dist/ngrx-slice && npm publish",
+    "scully": "npx scully -- --project docs",
+    "scully:serve": "npx scully serve -- --project docs"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +27,9 @@
     "@angular/platform-browser-dynamic": "~12.0.3",
     "@angular/router": "~12.0.3",
     "@ngrx/store": "^12.0.0",
+    "@scullyio/init": "^1.1.4",
+    "@scullyio/ng-lib": "^1.0.0",
+    "@scullyio/scully": "^1.0.0",
     "@taiga-ui/addon-doc": "^2.10.1",
     "@taiga-ui/addon-mobile": "^2.10.1",
     "@taiga-ui/cdk": "^2.10.1",

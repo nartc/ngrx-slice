@@ -99,13 +99,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1.5mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "5kb",
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [
@@ -114,6 +114,9 @@
                   "with": "projects/docs/src/environments/environment.prod.ts"
                 }
               ],
+              "optimization": {
+                "styles": false
+              },
               "outputHashing": "all"
             },
             "development": {
@@ -148,5 +151,5 @@
       }
     }
   },
-  "defaultProject": "ngrx-slice"
+  "defaultProject": "docs"
 }
