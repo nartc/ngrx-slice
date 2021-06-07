@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
       <p>
         <code>ngrx-slice</code>
         is a plugin that intends to provide the same functionalities that
-        <a href="https://redux-toolkit.js.org/api/createSlice">
+        <a tuiLink href="https://redux-toolkit.js.org/api/createSlice">
           Redux Toolkit createSlice
         </a>
         provides. It is meant to be
@@ -20,7 +20,9 @@ import { Component } from '@angular/core';
         also assumes the consumers to be familiar with the concepts of
         <strong>NgRX</strong>
         . If not, please visit
-        <a href="https://ngrx.io/guide/store">NgRX Official Documentations</a>
+        <a tuiLink href="https://ngrx.io/guide/store">
+          NgRX Official Documentations
+        </a>
         before continue on.
       </p>
 

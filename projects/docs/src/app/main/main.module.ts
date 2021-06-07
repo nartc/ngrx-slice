@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { generateRoutes, TuiAddonDocModule } from '@taiga-ui/addon-doc';
+import {TuiLinkModule} from "@taiga-ui/core";
 import { UiBlankLinkModule } from '../shared/ui-blank-link/ui-blank-link.module';
 import { ActionTypeModule } from './action-type/action-type.module';
 import { CounterEffectsModule } from './counter-effects/counter-effects.module';
@@ -26,6 +27,7 @@ import {SpecialMentionsModule} from "./special-mentions/special-mentions.module"
     ActionTypeModule,
     ExternalActionsModule,
     SpecialMentionsModule,
+    TuiLinkModule,
   ],
   exports: [MainComponent],
 })

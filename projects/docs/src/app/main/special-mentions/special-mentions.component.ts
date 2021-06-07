@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
       <ul class="tui-list">
         <li class="tui-list__item">
           Marko Stanimirović (
-          <a href="https://twitter.com/MarkoStDev">@MarkoStDev</a>
+          <a tuiLink href="https://twitter.com/MarkoStDev">@MarkoStDev</a>
           ) for
           <code>ngrx-child-selectors</code>
           and his
@@ -16,13 +16,15 @@ import { Component } from '@angular/core';
         </li>
         <li class="tui-list__item">
           Tim Deschryver (
-          <a href="https://twitter.com/tim_deschryver">@tim_deschryver</a>
+          <a tuiLink href="https://twitter.com/tim_deschryver">
+            @tim_deschryver
+          </a>
           ) for
           <code>ngrx-immer</code>
         </li>
         <li class="tui-list__item">
           Mark Erikson (
-          <a href="https://twitter.com/acemarke">@acemarke</a>
+          <a tuiLink href="https://twitter.com/acemarke">@acemarke</a>
           ) for Redux Toolkit
         </li>
       </ul>
