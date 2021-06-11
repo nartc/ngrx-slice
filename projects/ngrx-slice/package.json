@@ -18,10 +18,10 @@
     "type": "git"
   },
   "peerDependencies": {
-    "@angular/common": "^12.0.3",
-    "@angular/core": "^12.0.3",
-    "@ngrx/store": "^12.0.0",
-    "immer": "^9.0.2",
+    "@angular/common": "^12.0.4",
+    "@angular/core": "^12.0.4",
+    "@ngrx/store": "^12.1.0",
+    "immer": "^9.0.3",
     "ngrx-immer": "^0.0.5"
   },
   "dependencies": {
