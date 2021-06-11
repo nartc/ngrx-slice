@@ -1,5 +1,7 @@
 # ngrx-slice
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9f8041e8-2f30-4786-ade1-3e870518c1a1/deploy-status)](https://app.netlify.com/sites/ngrx-slice/deploys)
+
 `ngrx-slice` is a plugin that intends to provide the same functionalities
 that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) provides. It is meant to be **
 opinionated**.
