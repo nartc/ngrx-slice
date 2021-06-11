@@ -1,3 +1,22 @@
+## [1.1.0](https://github.com/nartc/ngrx-slice/compare/1.0.1...1.1.0) (2021-06-11)
+
+
+### Features
+
+* add clear and cancel to AsyncCaseReducers ([605b0fe](https://github.com/nartc/ngrx-slice/commit/605b0fe9b6b14e5afc85109314c7874ba9895c8c))
+* move immer and ngrx-immer to peerDeps ([e21c7d7](https://github.com/nartc/ngrx-slice/commit/e21c7d7fbd5daae907529759d468605a33b587cf))
+
+
+### Refactor
+
+* extract Async Action types to an const array ([519c336](https://github.com/nartc/ngrx-slice/commit/519c3363ffa6737a1b48ee131c90f387987c352f))
+
+
+### Documentations
+
+* update docs about clear and cancel async case reducer ([0b339b0](https://github.com/nartc/ngrx-slice/commit/0b339b084d214a67ba905ec0fe231a73f8ea0023))
+* use tuiLink for links and adjust Counter Example docs ([26e51a6](https://github.com/nartc/ngrx-slice/commit/26e51a678017fb6d9e9b4ea2a8311ee17c563d8b))
+
 ### [1.0.1](https://github.com/nartc/ngrx-slice/compare/1.0.0...1.0.1) (2021-06-06)
 
 
