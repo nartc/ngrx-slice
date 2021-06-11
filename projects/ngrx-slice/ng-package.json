@@ -8,9 +8,5 @@
       "ngrx-immer/store": "ngrx-immer/store",
       "@ngrx/store": "@ngrx/store"
     }
-  },
-  "allowedNonPeerDependencies": [
-    "immer",
-    "ngrx-immer"
-  ]
+  }
 }
