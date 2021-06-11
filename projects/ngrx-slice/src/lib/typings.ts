@@ -33,6 +33,8 @@ export interface AsyncCaseReducer<
   success: CaseReducer<SliceState, CaseAction>;
   failure?: CaseReducer<SliceState, CaseAction>;
   trigger?: CaseReducer<SliceState, CaseAction>;
+  clear?: CaseReducer<SliceState, CaseAction>;
+  cancel?: CaseReducer<SliceState, CaseAction>;
 }
 
 export interface SliceCaseReducers<SliceState = unknown> {
@@ -62,16 +64,18 @@ export type SliceSelector<
   >;
 };
 
-export type NestedSelectors<AppState extends Record<string, any>, SliceState> =
-  SliceState extends Primitive | unknown[] | Date
-    ? Record<string, never>
-    : {
-        [K in keyof SliceState &
-          string as `select${Capitalize<K>}`]: MemoizedSelector<
-          AppState,
-          SliceState[K]
-        >;
-      };
+export type NestedSelectors<
+  AppState extends Record<string, any>,
+  SliceState
+> = SliceState extends Primitive | unknown[] | Date
+  ? Record<string, never>
+  : {
+      [K in keyof SliceState &
+        string as `select${Capitalize<K>}`]: MemoizedSelector<
+        AppState,
+        SliceState[K]
+      >;
+    };
 
 export type SliceActions<
   SliceState,
@@ -89,6 +93,8 @@ export interface ActionCreatorForAsyncCaseReducer<
   success: ActionCreatorForCaseReducer<SliceState, AsyncReducer['success']>;
   failure: ActionCreatorForCaseReducer<SliceState, AsyncReducer['failure']>;
   trigger: ActionCreatorForCaseReducer<SliceState, AsyncReducer['trigger']>;
+  clear: ActionCreatorForCaseReducer<SliceState, AsyncReducer['clear']>;
+  cancel: ActionCreatorForCaseReducer<SliceState, AsyncReducer['cancel']>;
 }
 
 export type ActionCreatorForCaseReducer<SliceState, Reducer> =

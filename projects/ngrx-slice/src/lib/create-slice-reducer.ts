@@ -2,6 +2,7 @@ import type { ActionCreator, ActionReducer } from '@ngrx/store';
 import { createReducer, on } from '@ngrx/store';
 import type { ImmerOnReducer } from 'ngrx-immer/store';
 import { immerOn } from 'ngrx-immer/store';
+import { ASYNC_ACTIONS } from './constants';
 import type {
   CaseReducer,
   SliceActionNameGetter,
@@ -44,7 +45,7 @@ export function createSliceReducer<
       continue;
     }
 
-    ['success', 'failure', 'trigger'].forEach((asyncKey) => {
+    ASYNC_ACTIONS.forEach((asyncKey) => {
       const asyncReducer = (reducer as unknown as Record<string, CaseReducer>)[
         asyncKey
       ];

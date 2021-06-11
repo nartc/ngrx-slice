@@ -1,4 +1,5 @@
 import { ActionCreator, createAction, props } from '@ngrx/store';
+import { ASYNC_ACTIONS } from './constants';
 import type {
   SliceActionNameGetter,
   SliceActions,
@@ -27,7 +28,7 @@ export function createSliceActions<
     }
 
     actions[reducerKey] = {};
-    ['success', 'failure', 'trigger'].forEach((asyncKey) => {
+    ASYNC_ACTIONS.forEach((asyncKey) => {
       (actions[reducerKey] as Record<string, ActionCreator>)[asyncKey] =
         createAction(`${sliceActionName} ${asyncKey}`, props<any>());
     });
