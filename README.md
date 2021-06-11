@@ -14,7 +14,27 @@ npm install ngrx-slice
 yarn add ngrx-slice
 ```
 
-`ngrx-slice` depends on `ngrx-immer` and `immer` so those two will be installed along with `ngrx-slice`
+### Peer Dependencies
+
+`ngrx-slice` has `ngrx-immer` and `immer` as its `peerDependencies` so go ahead and install those:
+
+```shell
+npm install ngrx-immer immer
+```
+
+```shell
+yarn add ngrx-immer immer
+```
+
+Here's one command for all three:
+
+```shell
+npm install ngrx-slice ngrx-immer immer
+```
+
+```shell
+yarn add ngrx-slice ngrx-immer immer
+```
 
 ## Documentations
 

@@ -90,7 +90,7 @@ import { CounterActions, CounterSelectors } from './counter-effects.slice';
       is an object with the shape of
       <code>
         {{
-          '{ success: CaseReducer, trigger?: CaseReducer, failure?: CaseReducer }'
+          '{ success: CaseReducer, trigger?: CaseReducer, failure?: CaseReducer, cancel?: CaseReducer, clear?: CaseReducer }'
         }}
       </code>
       where the

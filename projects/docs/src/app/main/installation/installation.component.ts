@@ -8,15 +8,28 @@ import { Component } from '@angular/core';
       <code>npm install ngrx-slice</code>
       <code>yarn add ngrx-slice</code>
     </pre>
-      <tui-notification>
+
+      <p>
         <code>ngrx-slice</code>
-        depends on
+        has
         <code>ngrx-immer</code>
         and
         <code>immer</code>
-        so these two dependencies will be installed alongside with
-        <code>ngrx-slice</code>
-      </tui-notification>
+        as its
+        <code>peerDependencies</code>
+        so go ahead and install those:
+      </p>
+
+      <pre>
+        <code>npm install ngrx-immer immer</code>
+        <code>yarn add ngrx-immer immer</code>
+      </pre>
+
+      <p>Here's one command for all three:</p>
+      <pre>
+        <code>npm install ngrx-slice ngrx-immer immer</code>
+        <code>yarn add ngrx-slice ngrx-immer immer</code>
+      </pre>
     </tui-doc-example>
   `,
   styles: [
