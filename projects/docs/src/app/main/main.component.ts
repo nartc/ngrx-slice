@@ -61,6 +61,7 @@ import { Component } from '@angular/core';
       <docs-installation></docs-installation>
       <docs-counter></docs-counter>
       <docs-counter-effects></docs-counter-effects>
+      <docs-namespaced-slice></docs-namespaced-slice>
       <docs-action-type></docs-action-type>
       <docs-external-actions></docs-external-actions>
       <docs-special-mentions></docs-special-mentions>

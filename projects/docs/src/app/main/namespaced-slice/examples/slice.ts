@@ -1,5 +1,16 @@
-import { createNamespacedSlice } from '../../../../../ngrx-slice/src/public-api';
-import { initialState } from '../../shared/data-access-counter/counter.state';
+import { createNamespacedSlice } from 'ngrx-slice';
+
+export interface CounterState {
+  value: number;
+  incrementCount: number;
+  decrementCount: number;
+}
+
+export const initialState: CounterState = {
+  decrementCount: 0,
+  incrementCount: 0,
+  value: 0,
+};
 
 export const { CounterActions, CounterSelectors, CounterFeature } =
   createNamespacedSlice({

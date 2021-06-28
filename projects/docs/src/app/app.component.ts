@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
     <!--The content below is only a placeholder and can be replaced.-->
     <tui-doc-main>
       <ng-container ngProjectAs="tuiDocHeader">
-        <a tuiLink class="link" href="https://github.com/nartc/ngrx-slice"> GitHub </a>
+        <a tuiLink class="link" href="https://github.com/nartc/ngrx-slice">
+          GitHub
+        </a>
       </ng-container>
     </tui-doc-main>
   `,

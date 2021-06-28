@@ -141,16 +141,29 @@ export interface SliceOptions<
   sliceActionNameGetter?: SliceActionNameGetter;
 }
 
+export interface Slice<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+  > {
+  name: SliceName;
+  reducer: ActionReducer<SliceState>;
+  actions: SliceActions<SliceState, CaseReducers>;
+  selectors: SliceSelector<AppState, SliceName, SliceState> &
+    NestedSelectors<AppState, SliceState>;
+}
+
 export type SliceActionsReturn<
   AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-> = {
+  > = {
   [ActionKey in SliceName as `${Capitalize<ActionKey>}Actions`]: SliceActions<
     SliceState,
     CaseReducers
-  >;
+    >;
 };
 
 export type SliceSelectorsReturn<
@@ -158,13 +171,13 @@ export type SliceSelectorsReturn<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-> = {
+  > = {
   [SelectorsKey in SliceName as `${Capitalize<SelectorsKey>}Selectors`]: SliceSelector<
-    AppState,
-    SliceName,
-    SliceState
+  AppState,
+  SliceName,
+  SliceState
   > &
-    NestedSelectors<AppState, SliceState>;
+  NestedSelectors<AppState, SliceState>;
 };
 
 export type SliceFeatureReturn<
@@ -172,19 +185,19 @@ export type SliceFeatureReturn<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-> = {
+  > = {
   [FeatureKey in SliceName as `${Capitalize<FeatureKey>}Feature`]: {
     name: SliceName;
     reducer: ActionReducer<SliceState>;
   };
 };
 
-export type Slice<
+export type NamespacedSlice<
   AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-> = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
+  > = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
   SliceSelectorsReturn<AppState, SliceName, SliceState, CaseReducers> &
   SliceFeatureReturn<AppState, SliceName, SliceState, CaseReducers>;
 
@@ -205,6 +218,24 @@ export declare function createSlice<
   SliceState,
   CaseReducers
 >;
+
+export declare function createNamespacedSlice<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string = keyof AppState & string,
+  SliceState extends AppState[SliceName] = AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
+  >({
+      name,
+      initialState,
+      reducers,
+      extraReducers,
+      sliceActionNameGetter,
+    }: SliceOptions<SliceName, SliceState, CaseReducers>): NamespacedSlice<
+  AppState,
+  SliceName,
+  SliceState,
+  CaseReducers
+  >;
 ```
 
 ## Contribution

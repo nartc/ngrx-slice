@@ -13,9 +13,9 @@ export const initialState: CounterState = {
 };
 
 export const {
-  CounterActions,
-  CounterSelectors,
-  CounterFeature
+  actions: CounterActions,
+  selectors: CounterSelectors,
+  ...CounterFeature
 } = createSlice({
   name: 'counter',
   initialState,

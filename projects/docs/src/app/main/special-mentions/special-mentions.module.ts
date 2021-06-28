@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {TuiDocExampleModule} from "@taiga-ui/addon-doc";
-import {TuiLinkModule} from "@taiga-ui/core";
+import { TuiDocExampleModule } from '@taiga-ui/addon-doc';
+import { TuiLinkModule } from '@taiga-ui/core';
 import { SpecialMentionsComponent } from './special-mentions.component';
 
 @NgModule({

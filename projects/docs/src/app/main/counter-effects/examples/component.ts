@@ -4,7 +4,7 @@ import { CounterActions, CounterSelectors } from './slice';
 
 @Component({
   selector: 'counter',
-  templateUrl: 'template.html'
+  templateUrl: 'template.html',
 })
 export class CounterComponent {
   readonly count$ = this.store.select(CounterSelectors.selectValue);

@@ -1,5 +1,5 @@
 import {
-  createSlice,
+  createNamespacedSlice,
   noopReducer,
   PayloadAction,
 } from '../../../../../ngrx-slice/src/public-api';
@@ -12,7 +12,7 @@ export const {
   CounterEffectsActions,
   CounterEffectsSelectors,
   CounterEffectsFeature,
-} = createSlice({
+} = createNamespacedSlice({
   name: 'counterEffects',
   initialState,
   reducers: {

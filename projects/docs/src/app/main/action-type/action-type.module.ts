@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TuiAddonDocModule} from "@taiga-ui/addon-doc";
+import { NgModule } from '@angular/core';
+import { TuiAddonDocModule } from '@taiga-ui/addon-doc';
 import { ActionTypeComponent } from './action-type.component';
-
-
 
 @NgModule({
   declarations: [ActionTypeComponent],

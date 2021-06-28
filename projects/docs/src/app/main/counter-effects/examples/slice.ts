@@ -12,25 +12,27 @@ export const initialState: CounterState = {
   value: 0,
 };
 
-export const { CounterActions, CounterSelectors, CounterFeature } = createSlice(
-  {
-    name: 'counter',
-    initialState,
-    reducers: {
-      increment: (state) => {
-        state.value++;
-        state.incrementCount++;
-      },
-      decrement: (state) => {
-        state.value--;
-        state.decrementCount++;
-      },
-      multiplyBy: {
-        success: (state, action: PayloadAction<{ value: number }>) => {
-          state.value = action.value;
-        },
-        trigger: noopReducer<CounterState, { multiplier: number }>(),
-      },
+export const {
+  actions: CounterActions,
+  selectors: CounterSelectors,
+  ...CounterFeature
+} = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment: (state) => {
+      state.value++;
+      state.incrementCount++;
     },
-  }
-);
+    decrement: (state) => {
+      state.value--;
+      state.decrementCount++;
+    },
+    multiplyBy: {
+      success: (state, action: PayloadAction<{ value: number }>) => {
+        state.value = action.value;
+      },
+      trigger: noopReducer<CounterState, { multiplier: number }>(),
+    },
+  },
+});
