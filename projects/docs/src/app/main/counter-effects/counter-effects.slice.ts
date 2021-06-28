@@ -1,7 +1,7 @@
 import {
   createSlice,
+  noopReducer,
   PayloadAction,
-  typedNoopReducer,
 } from '../../../../../ngrx-slice/src/public-api';
 import {
   CounterState,
@@ -9,11 +9,11 @@ import {
 } from '../../shared/data-access-counter/counter.state';
 
 export const {
-  actions: CounterActions,
-  selectors: CounterSelectors,
-  ...counterFeature
+  CounterEffectsActions,
+  CounterEffectsSelectors,
+  CounterEffectsFeature,
 } = createSlice({
-  name: 'counter-effects',
+  name: 'counterEffects',
   initialState,
   reducers: {
     increment: (state) => {
@@ -28,7 +28,8 @@ export const {
       success: (state, action: PayloadAction<{ value: number }>) => {
         state.value = action.value;
       },
-      trigger: typedNoopReducer<CounterState, { multiplier: number }>(),
+      trigger: noopReducer<CounterState, { multiplier: number }>(),
+      cancel: noopReducer<CounterState>(),
     },
   },
 });

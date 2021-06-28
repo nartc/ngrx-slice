@@ -1,6 +1,8 @@
 // @ts-ignore
 import { default as componentTs } from '!!raw-loader!./examples/component.ts';
 // @ts-ignore
+import { default as moduleTs } from '!!raw-loader!./examples/module.ts';
+// @ts-ignore
 import { default as sliceTs } from '!!raw-loader!./examples/slice.ts';
 // @ts-ignore
 import { default as templateHtml } from '!!raw-loader!./examples/template.html';
@@ -185,6 +187,7 @@ export class CounterComponent {
     'slice.ts': sliceTs,
     'component.ts': componentTs,
     'template.html': templateHtml,
+    'module.ts': moduleTs,
   };
 
   constructor(private readonly store: Store) {}

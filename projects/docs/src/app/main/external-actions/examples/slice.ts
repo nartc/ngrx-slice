@@ -2,9 +2,9 @@ import { on } from '@ngrx/store';
 import { triple } from "path/to/external";
 
 const {
-  actions: CounterActions,
-  selectors: CounterSelectors,
-  ...counterFeature
+  CounterActions,
+  CounterSelectors,
+  CounterFeature
 } = createSlice({
   name: "counter",
   initialState,

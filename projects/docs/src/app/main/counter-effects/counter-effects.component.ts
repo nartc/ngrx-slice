@@ -3,13 +3,18 @@ import { default as componentTs } from '!!raw-loader!./examples/component.ts';
 // @ts-ignore
 import { default as effectTs } from '!!raw-loader!./examples/effect.ts';
 // @ts-ignore
+import { default as moduleTs } from '!!raw-loader!./examples/module.ts';
+// @ts-ignore
 import { default as sliceTs } from '!!raw-loader!./examples/slice.ts';
 // @ts-ignore
 import { default as templateHtml } from '!!raw-loader!./examples/template.html';
 
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CounterActions, CounterSelectors } from './counter-effects.slice';
+import {
+  CounterEffectsActions,
+  CounterEffectsSelectors,
+} from './counter-effects.slice';
 
 @Component({
   selector: 'docs-counter-effects',
@@ -147,26 +152,11 @@ import { CounterActions, CounterSelectors } from './counter-effects.slice';
       <strong>Side Effects</strong>
       . For these situations,
       <code>ngrx-slice</code>
-      provides two
-      <strong>Noop Reducers</strong>
+      provides the
+      <code>noopReducer<{{ 'SliceState, ActionPayload' }}>()</code>
+      which does nothing rather than making itself available as a generated
+      action.
     </p>
-
-    <ul class="tui-list">
-      <li class="tui-list__item">
-        <code>noopReducer<{{ 'SliceState' }}>()</code>
-        : This reducer is the same as
-        <code>(state: SliceState) => void</code>
-        which does nothing rather than making itself available as a generated
-        actions.
-      </li>
-      <li class="tui-list__item">
-        <code>typedNoopReducer<{{ 'SliceState, ActionPayload' }}>()</code>
-        : This reducer also does not change State but allows
-        <code>ngrx-slice</code>
-        to generate the Action with the correct type for the
-        <code>payload</code>
-      </li>
-    </ul>
   `,
   styles: [
     `
@@ -179,12 +169,12 @@ import { CounterActions, CounterSelectors } from './counter-effects.slice';
   ],
 })
 export class CounterEffectsComponent {
-  readonly count$ = this.store.select(CounterSelectors.selectValue);
+  readonly count$ = this.store.select(CounterEffectsSelectors.selectValue);
   readonly incrementCount$ = this.store.select(
-    CounterSelectors.selectIncrementCount
+    CounterEffectsSelectors.selectIncrementCount
   );
   readonly decrementCount$ = this.store.select(
-    CounterSelectors.selectDecrementCount
+    CounterEffectsSelectors.selectDecrementCount
   );
 
   lastMultiplier = CounterEffectsComponent.getRandom();
@@ -194,21 +184,24 @@ export class CounterEffectsComponent {
     'effect.ts': effectTs,
     'component.ts': componentTs,
     'template.html': templateHtml,
+    'module.ts': moduleTs,
   };
 
   constructor(private readonly store: Store) {}
 
   onDecrement() {
-    this.store.dispatch(CounterActions.decrement());
+    this.store.dispatch(CounterEffectsActions.decrement());
   }
 
   onIncrement() {
-    this.store.dispatch(CounterActions.increment());
+    this.store.dispatch(CounterEffectsActions.increment());
   }
 
   onMultiply() {
     this.store.dispatch(
-      CounterActions.multiplyBy.trigger({ multiplier: this.lastMultiplier })
+      CounterEffectsActions.multiplyBy.trigger({
+        multiplier: this.lastMultiplier,
+      })
     );
     this.lastMultiplier = CounterEffectsComponent.getRandom();
   }

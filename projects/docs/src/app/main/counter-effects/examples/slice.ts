@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, typedNoopReducer } from 'ngrx-slice';
+import { createSlice, noopReducer, PayloadAction } from 'ngrx-slice';
 
 export interface CounterState {
   value: number;
@@ -12,27 +12,25 @@ export const initialState: CounterState = {
   value: 0,
 };
 
-export const {
-  actions: CounterActions,
-  selectors: CounterSelectors,
-  ...counterFeature
-} = createSlice({
-  name: 'counter',
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.value++;
-      state.incrementCount++;
-    },
-    decrement: (state) => {
-      state.value--;
-      state.decrementCount++;
-    },
-    multiplyBy: {
-      success: (state, action: PayloadAction<{ value: number }>) => {
-        state.value = action.value;
+export const { CounterActions, CounterSelectors, CounterFeature } = createSlice(
+  {
+    name: 'counter',
+    initialState,
+    reducers: {
+      increment: (state) => {
+        state.value++;
+        state.incrementCount++;
       },
-      trigger: typedNoopReducer<CounterState, { multiplier: number }>(),
+      decrement: (state) => {
+        state.value--;
+        state.decrementCount++;
+      },
+      multiplyBy: {
+        success: (state, action: PayloadAction<{ value: number }>) => {
+          state.value = action.value;
+        },
+        trigger: noopReducer<CounterState, { multiplier: number }>(),
+      },
     },
-  },
-});
+  }
+);

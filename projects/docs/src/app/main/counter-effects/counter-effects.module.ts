@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TuiAddonDocModule } from '@taiga-ui/addon-doc';
-import {TuiButtonModule, TuiGroupModule} from "@taiga-ui/core";
+import { TuiButtonModule, TuiGroupModule } from '@taiga-ui/core';
 import { UiBlankLinkModule } from '../../shared/ui-blank-link/ui-blank-link.module';
 import { CounterEffectsComponent } from './counter-effects.component';
-import { counterFeature } from './counter-effects.slice';
+import { CounterEffectsFeature } from './counter-effects.slice';
 import { CounterEffect } from './counter.effect';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { CounterEffect } from './counter.effect';
     CommonModule,
     TuiAddonDocModule,
     UiBlankLinkModule,
-    StoreModule.forFeature(counterFeature),
+    StoreModule.forFeature(CounterEffectsFeature),
     EffectsModule.forFeature([CounterEffect]),
     TuiButtonModule,
     TuiGroupModule,

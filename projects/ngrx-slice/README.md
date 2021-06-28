@@ -1,5 +1,7 @@
 # ngrx-slice
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9f8041e8-2f30-4786-ade1-3e870518c1a1/deploy-status)](https://app.netlify.com/sites/ngrx-slice/deploys)
+
 `ngrx-slice` is a plugin that intends to provide the same functionalities
 that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) provides. It is meant to be **
 opinionated**.
@@ -95,8 +97,8 @@ const counterReducer = createReducer(
     value: state.value - 1,
     decrement: state.decrement + 1,
   })),
-  on(multiplyBySuccess, (state, action) => ({...state, value: action.value})),
-  on(double, (state) => ({...state, value: state.value * 2}))
+  on(multiplyBySuccess, (state, action) => ({ ...state, value: action.value })),
+  on(double, (state) => ({ ...state, value: state.value * 2 }))
 );
 
 // Selectors
@@ -114,11 +116,10 @@ const selectDecrement = createSelector(
 // Module
 @NgModule({
   imports: [
-    StoreModule.forFeature({name: "counter", reducer: counterReducer}),
+    StoreModule.forFeature({ name: "counter", reducer: counterReducer }),
   ],
 })
-export class CounterModule {
-}
+export class CounterModule {}
 ```
 
 > There is an `Effect` that will handle `multiplyBy` action but this will be the same for `ngrx-slice` as well.
@@ -128,9 +129,11 @@ export class CounterModule {
 ### `createSlice`
 
 ```ts
-export interface SliceOptions<SliceName extends string,
+export interface SliceOptions<
+  SliceName extends string,
   SliceState,
-  CaseReducers extends SliceCaseReducers<SliceState>> {
+  CaseReducers extends SliceCaseReducers<SliceState>
+> {
   name: SliceName;
   initialState: SliceState;
   reducers: CaseReducers;
@@ -138,30 +141,70 @@ export interface SliceOptions<SliceName extends string,
   sliceActionNameGetter?: SliceActionNameGetter;
 }
 
-export interface Slice<AppState extends Record<string, any>,
+export type SliceActionsReturn<
+  AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState>> {
-  name: SliceName;
-  reducer: ActionReducer<SliceState>;
-  actions: SliceActions<SliceState, CaseReducers>;
-  selectors: SliceSelector<AppState, SliceName, SliceState> &
-    NestedSelectors<AppState, SliceState>;
-}
+  CaseReducers extends SliceCaseReducers<SliceState>
+> = {
+  [ActionKey in SliceName as `${Capitalize<ActionKey>}Actions`]: SliceActions<
+    SliceState,
+    CaseReducers
+  >;
+};
 
-export declare function createSlice<AppState extends Record<string, any>,
+export type SliceSelectorsReturn<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+> = {
+  [SelectorsKey in SliceName as `${Capitalize<SelectorsKey>}Selectors`]: SliceSelector<
+    AppState,
+    SliceName,
+    SliceState
+  > &
+    NestedSelectors<AppState, SliceState>;
+};
+
+export type SliceFeatureReturn<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+> = {
+  [FeatureKey in SliceName as `${Capitalize<FeatureKey>}Feature`]: {
+    name: SliceName;
+    reducer: ActionReducer<SliceState>;
+  };
+};
+
+export type Slice<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+> = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
+  SliceSelectorsReturn<AppState, SliceName, SliceState, CaseReducers> &
+  SliceFeatureReturn<AppState, SliceName, SliceState, CaseReducers>;
+
+export declare function createSlice<
+  AppState extends Record<string, any>,
   SliceName extends keyof AppState & string = keyof AppState & string,
   SliceState extends AppState[SliceName] = AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>>({
-                                                                                        name,
-                                                                                        initialState,
-                                                                                        reducers,
-                                                                                        extraReducers,
-                                                                                        sliceActionNameGetter,
-                                                                                      }: SliceOptions<SliceName, SliceState, CaseReducers>): Slice<AppState,
+  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
+>({
+  name,
+  initialState,
+  reducers,
+  extraReducers,
+  sliceActionNameGetter,
+}: SliceOptions<SliceName, SliceState, CaseReducers>): Slice<
+  AppState,
   SliceName,
   SliceState,
-  CaseReducers>;
+  CaseReducers
+>;
 ```
 
 ## Contribution
