@@ -20,9 +20,11 @@ This has the downside of the `name` has to be `camelCase`.
 
 ```ts
 // before
+noopReducer<CounterState>();
 typedNoopReducer<CounterState, {multiplier: number}>();
 
 // after
+noopReducer<CounterState>();
 noopReducer<CounterState, {multiplier: number}>();
 ```
 

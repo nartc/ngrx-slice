@@ -71,7 +71,7 @@ describe(createSlice.name, () => {
     const noop = noopReducer<CounterState>();
     const typedNoop = noopReducer<CounterState, { foo: 'foo' }>();
 
-    noop(initialState, CounterActions.increment());
+    noop(initialState);
     expect(initialState).toEqual({ value: 0, incremented: 0, decremented: 0 });
 
     typedNoop(initialState, CounterActions.increment());
