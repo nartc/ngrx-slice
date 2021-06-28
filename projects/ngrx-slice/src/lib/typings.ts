@@ -109,15 +109,49 @@ export type ActionCreatorForCaseReducer<SliceState, Reducer> =
     type: string;
   };
 
-export interface Slice<
+export type SliceActionsReturn<
   AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-> {
-  name: SliceName;
-  reducer: ActionReducer<SliceState>;
-  actions: SliceActions<SliceState, CaseReducers>;
-  selectors: SliceSelector<AppState, SliceName, SliceState> &
+> = {
+  [ActionKey in SliceName as `${Capitalize<ActionKey>}Actions`]: SliceActions<
+    SliceState,
+    CaseReducers
+  >;
+};
+
+export type SliceSelectorsReturn<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+> = {
+  [SelectorsKey in SliceName as `${Capitalize<SelectorsKey>}Selectors`]: SliceSelector<
+    AppState,
+    SliceName,
+    SliceState
+  > &
     NestedSelectors<AppState, SliceState>;
-}
+};
+
+export type SliceFeatureReturn<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+> = {
+  [FeatureKey in SliceName as `${Capitalize<FeatureKey>}Feature`]: {
+    name: SliceName;
+    reducer: ActionReducer<SliceState>;
+  };
+};
+
+export type Slice<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+> = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
+  SliceSelectorsReturn<AppState, SliceName, SliceState, CaseReducers> &
+  SliceFeatureReturn<AppState, SliceName, SliceState, CaseReducers>;

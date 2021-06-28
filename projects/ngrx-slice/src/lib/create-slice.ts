@@ -4,7 +4,6 @@ import { createSliceActions } from './create-slice-actions';
 import { createSliceReducer } from './create-slice-reducer';
 import { createSliceSelectors } from './create-slice-selectors';
 import type {
-  CaseReducer,
   PayloadAction,
   Slice,
   SliceCaseReducers,
@@ -19,15 +18,13 @@ function defaultSliceActionNameGetter(
   return `[${capitalize(featureName)}] ${actionName}`;
 }
 
-export function noopReducer<SliceState>(): CaseReducer<SliceState> {
-  return (state) => state;
-}
-
-export function typedNoopReducer<
+export function noopReducer<
   SliceState,
-  ActionProps extends Record<string, unknown>
->(): (state: Draft<SliceState>, action: PayloadAction<ActionProps>) => void {
-  return (state, _) => state;
+  ActionProps = false
+>(): ActionProps extends false
+  ? (state: Draft<SliceState>) => void
+  : (state: Draft<SliceState>, action: PayloadAction<ActionProps>) => void {
+  return (state: Draft<SliceState>) => state;
 }
 
 export function createSlice<
@@ -68,12 +65,24 @@ export function createSlice<
   >(initialState, sliceActionNameGetter, actions, reducers, extraReducers);
 
   return {
-    name,
-    reducer,
-    actions,
-    selectors: {
+    [`${capitalize(name)}Feature`]: {
+      name,
+      reducer,
+    },
+    [`${capitalize(name)}Actions`]: actions,
+    [`${capitalize(name)}Selectors`]: {
       [`select${capitalize(name)}State`]: featureSelector,
       ...nestedSelectors,
-    } as Slice<AppState, SliceName, SliceState, CaseReducers>['selectors'],
-  };
+    },
+  } as Slice<AppState, SliceName, SliceState, CaseReducers>;
+
+  // return {
+  //   name,
+  //   reducer,
+  //   actions,
+  //   selectors: {
+  //     [`select${capitalize(name)}State`]: featureSelector,
+  //     ...nestedSelectors,
+  //   } as Slice<AppState, SliceName, SliceState, CaseReducers>['selectors'],
+  // };
 }
