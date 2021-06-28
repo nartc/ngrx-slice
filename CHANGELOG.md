@@ -1,3 +1,41 @@
+## [2.0.0](https://github.com/nartc/ngrx-slice/compare/1.1.0...2.0.0) (2021-06-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* `createSlice` now returns a more opinionated object based on the `name` of the Slice.
+
+```ts
+// before
+export const {actions, selectors, name, reducer} = createSlice({name: 'counter'})
+
+// after
+export const {CounterActions, CounterSelectors, CounterFeature} = createSlice({name: 'counter'})
+```
+
+`name` of `SliceOptions` is now utilized to make the return type of `createSlice` to have better namespacing.
+This has the downside of the `name` has to be `camelCase`.
+
+* `typedNoopReducer` has been removed. Use `noopReducer` instead
+
+```ts
+// before
+typedNoopReducer<CounterState, {multiplier: number}>();
+
+// after
+noopReducer<CounterState, {multiplier: number}>();
+```
+
+### Features
+
+* clean up API ([95312f6](https://github.com/nartc/ngrx-slice/commit/95312f606628080cd809752c63f3929af9d84db7))
+
+
+### Documentations
+
+* add netlify status badge ([6749bca](https://github.com/nartc/ngrx-slice/commit/6749bcaed3baa089b62620ffa9799651ed6325ff))
+* update docs to reflect updated API ([9311408](https://github.com/nartc/ngrx-slice/commit/931140875ed2bade633b2bfa7116277193b4b6cf))
+
 ## [1.1.0](https://github.com/nartc/ngrx-slice/compare/1.0.1...1.1.0) (2021-06-11)
 
 
