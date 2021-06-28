@@ -1,4 +1,4 @@
-import { createSlice, noopReducer } from './create-slice';
+import { createNamespacedSlice, noopReducer } from './create-slice';
 import { PayloadAction } from './typings';
 import { capitalize } from './utils';
 
@@ -14,7 +14,7 @@ const initialState: CounterState = {
   value: 0,
 };
 
-const { CounterActions, CounterSelectors, CounterFeature } = createSlice({
+const { CounterActions, CounterSelectors, CounterFeature } = createNamespacedSlice({
   name: 'counter',
   initialState,
   reducers: {
@@ -33,7 +33,7 @@ const { CounterActions, CounterSelectors, CounterFeature } = createSlice({
   },
 });
 
-describe(createSlice.name, () => {
+describe(createNamespacedSlice.name, () => {
   it('should return correct name', () => {
     expect(CounterFeature.name).toEqual('counter');
   });

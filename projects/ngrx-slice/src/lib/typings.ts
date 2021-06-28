@@ -109,6 +109,19 @@ export type ActionCreatorForCaseReducer<SliceState, Reducer> =
     type: string;
   };
 
+export interface Slice<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string,
+  SliceState extends AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState>
+  > {
+  name: SliceName;
+  reducer: ActionReducer<SliceState>;
+  actions: SliceActions<SliceState, CaseReducers>;
+  selectors: SliceSelector<AppState, SliceName, SliceState> &
+    NestedSelectors<AppState, SliceState>;
+}
+
 export type SliceActionsReturn<
   AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
@@ -147,7 +160,7 @@ export type SliceFeatureReturn<
   };
 };
 
-export type Slice<
+export type NamespacedSlice<
   AppState extends Record<string, any>,
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],

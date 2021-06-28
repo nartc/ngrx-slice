@@ -4,6 +4,7 @@ import { createSliceActions } from './create-slice-actions';
 import { createSliceReducer } from './create-slice-reducer';
 import { createSliceSelectors } from './create-slice-selectors';
 import type {
+  NamespacedSlice,
   PayloadAction,
   Slice,
   SliceCaseReducers,
@@ -65,24 +66,52 @@ export function createSlice<
   >(initialState, sliceActionNameGetter, actions, reducers, extraReducers);
 
   return {
+    name,
+    reducer,
+    actions,
+    selectors: {
+      [`select${capitalize(name)}State`]: featureSelector,
+      ...nestedSelectors,
+    } as Slice<AppState, SliceName, SliceState, CaseReducers>['selectors'],
+  };
+}
+
+export function createNamespacedSlice<
+  AppState extends Record<string, any>,
+  SliceName extends keyof AppState & string = keyof AppState & string,
+  SliceState extends AppState[SliceName] = AppState[SliceName],
+  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
+>({
+  name,
+  initialState,
+  reducers,
+  extraReducers,
+  sliceActionNameGetter = defaultSliceActionNameGetter,
+}: SliceOptions<SliceName, SliceState, CaseReducers>): NamespacedSlice<
+  AppState,
+  SliceName,
+  SliceState,
+  CaseReducers
+> {
+  const {
+    name: sliceName,
+    reducer,
+    selectors,
+    actions,
+  } = createSlice({
+    name,
+    initialState,
+    reducers,
+    extraReducers,
+    sliceActionNameGetter,
+  });
+
+  return {
     [`${capitalize(name)}Feature`]: {
-      name,
+      name: sliceName,
       reducer,
     },
     [`${capitalize(name)}Actions`]: actions,
-    [`${capitalize(name)}Selectors`]: {
-      [`select${capitalize(name)}State`]: featureSelector,
-      ...nestedSelectors,
-    },
-  } as Slice<AppState, SliceName, SliceState, CaseReducers>;
-
-  // return {
-  //   name,
-  //   reducer,
-  //   actions,
-  //   selectors: {
-  //     [`select${capitalize(name)}State`]: featureSelector,
-  //     ...nestedSelectors,
-  //   } as Slice<AppState, SliceName, SliceState, CaseReducers>['selectors'],
-  // };
+    [`${capitalize(name)}Selectors`]: selectors,
+  } as NamespacedSlice<AppState, SliceName, SliceState, CaseReducers>;
 }
