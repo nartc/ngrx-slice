@@ -1,3 +1,15 @@
+## [2.1.0](https://github.com/nartc/ngrx-slice/compare/2.0.0...2.1.0) (2021-06-28)
+
+
+### Features
+
+* add createNamespacedSlice in addition to createSlice ([71ef0f1](https://github.com/nartc/ngrx-slice/commit/71ef0f1bbfabdd90c88c64fb2ab433943b297326))
+
+
+### Documentations
+
+* clean up docs ([9bbe224](https://github.com/nartc/ngrx-slice/commit/9bbe2242f1d052f61b8b09984869736126a5e3d1))
+
 ## [2.0.0](https://github.com/nartc/ngrx-slice/compare/1.1.0...2.0.0) (2021-06-28)
 
 
