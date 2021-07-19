@@ -1,3 +1,16 @@
+### [2.1.1](https://github.com/nartc/ngrx-slice/compare/2.1.0...2.1.1) (2021-07-19)
+
+
+### Bug Fixes
+
+* use proper type fo createSliceAction ([d8334fd](https://github.com/nartc/ngrx-slice/commit/d8334fd0b5be27d55b3c1c40794fb6345c8e966e))
+
+
+### Documentations
+
+* add angular to npm keywords ([3d00843](https://github.com/nartc/ngrx-slice/commit/3d00843e89a4a0f1c292b59d5b756a935ecbff36))
+* fix readme ([3a013c3](https://github.com/nartc/ngrx-slice/commit/3a013c3c84f87087bcd05f4d3e7f5f1e1e38dd73))
+
 ## [2.1.0](https://github.com/nartc/ngrx-slice/compare/2.0.0...2.1.0) (2021-06-28)
 
 
