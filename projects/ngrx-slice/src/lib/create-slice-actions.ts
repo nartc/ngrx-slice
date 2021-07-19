@@ -23,14 +23,20 @@ export function createSliceActions<
     const sliceActionName = sliceActionNameGetter(featureName, reducerKey);
 
     if (typeOfReducer === 'function') {
-      actions[reducerKey] = createAction(sliceActionName, props<any>());
+      actions[reducerKey] = createAction(
+        sliceActionName,
+        props<Record<string, unknown>>()
+      );
       continue;
     }
 
     actions[reducerKey] = {};
     ASYNC_ACTIONS.forEach((asyncKey) => {
       (actions[reducerKey] as Record<string, ActionCreator>)[asyncKey] =
-        createAction(`${sliceActionName} ${asyncKey}`, props<any>());
+        createAction(
+          `${sliceActionName} ${asyncKey}`,
+          props<Record<string, unknown>>()
+        );
     });
   }
 

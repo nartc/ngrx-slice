@@ -3,8 +3,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9f8041e8-2f30-4786-ade1-3e870518c1a1/deploy-status)](https://app.netlify.com/sites/ngrx-slice/deploys)
 
 `ngrx-slice` is a plugin that intends to provide the same functionalities
-that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) provides. It is meant to be **
-opinionated**.
+that [Redux Toolkit createSlice](https://redux-toolkit.js.org/api/createSlice) provides. It is meant to be **opinionated**.
 
 ## Installation
 
@@ -146,7 +145,7 @@ export interface Slice<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-  > {
+> {
   name: SliceName;
   reducer: ActionReducer<SliceState>;
   actions: SliceActions<SliceState, CaseReducers>;
@@ -159,11 +158,11 @@ export type SliceActionsReturn<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-  > = {
+> = {
   [ActionKey in SliceName as `${Capitalize<ActionKey>}Actions`]: SliceActions<
     SliceState,
     CaseReducers
-    >;
+  >;
 };
 
 export type SliceSelectorsReturn<
@@ -171,13 +170,13 @@ export type SliceSelectorsReturn<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-  > = {
+> = {
   [SelectorsKey in SliceName as `${Capitalize<SelectorsKey>}Selectors`]: SliceSelector<
-  AppState,
-  SliceName,
-  SliceState
+    AppState,
+    SliceName,
+    SliceState
   > &
-  NestedSelectors<AppState, SliceState>;
+    NestedSelectors<AppState, SliceState>;
 };
 
 export type SliceFeatureReturn<
@@ -185,7 +184,7 @@ export type SliceFeatureReturn<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-  > = {
+> = {
   [FeatureKey in SliceName as `${Capitalize<FeatureKey>}Feature`]: {
     name: SliceName;
     reducer: ActionReducer<SliceState>;
@@ -197,7 +196,7 @@ export type NamespacedSlice<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-  > = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
+> = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
   SliceSelectorsReturn<AppState, SliceName, SliceState, CaseReducers> &
   SliceFeatureReturn<AppState, SliceName, SliceState, CaseReducers>;
 
@@ -224,18 +223,18 @@ export declare function createNamespacedSlice<
   SliceName extends keyof AppState & string = keyof AppState & string,
   SliceState extends AppState[SliceName] = AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
-  >({
-      name,
-      initialState,
-      reducers,
-      extraReducers,
-      sliceActionNameGetter,
-    }: SliceOptions<SliceName, SliceState, CaseReducers>): NamespacedSlice<
+>({
+  name,
+  initialState,
+  reducers,
+  extraReducers,
+  sliceActionNameGetter,
+}: SliceOptions<SliceName, SliceState, CaseReducers>): NamespacedSlice<
   AppState,
   SliceName,
   SliceState,
   CaseReducers
-  >;
+>;
 ```
 
 ## Contribution
