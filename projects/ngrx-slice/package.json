@@ -5,6 +5,7 @@
   "description": "createSlice plugin for NgRX",
   "keywords": [
     "ngrx",
+    "angular",
     "redux toolkit",
     "create slice",
     "typescript"
