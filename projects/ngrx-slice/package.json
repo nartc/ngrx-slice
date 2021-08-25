@@ -19,11 +19,11 @@
     "type": "git"
   },
   "peerDependencies": {
-    "@angular/common": "^12.0.4",
-    "@angular/core": "^12.0.4",
-    "@ngrx/store": "^12.1.0",
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0",
+    "@ngrx/store": "^12.4.0",
     "immer": "^9.0.3",
-    "ngrx-immer": "^0.0.5"
+    "ngrx-immer": "^1.0.0"
   },
   "dependencies": {
     "tslib": "^2.1.0"
