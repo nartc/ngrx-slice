@@ -64,6 +64,7 @@ import { Component } from '@angular/core';
       <docs-namespaced-slice></docs-namespaced-slice>
       <docs-action-type></docs-action-type>
       <docs-external-actions></docs-external-actions>
+      <docs-todo></docs-todo>
       <docs-special-mentions></docs-special-mentions>
     </tui-doc-page>
   `,

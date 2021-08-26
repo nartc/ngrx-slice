@@ -13,8 +13,13 @@
     "downlevelIteration": true,
     "paths": {
       "ngrx-slice": [
+        "projects/ngrx-slice/src/public-api",
         "dist/ngrx-slice/ngrx-slice",
         "dist/ngrx-slice"
+      ],
+      "ngrx-slice/entity": [
+        "projects/ngrx-slice/entity/src/public-api",
+        "dist/ngrx-slice/entity"
       ]
     },
     "experimentalDecorators": true,
