@@ -1,3 +1,10 @@
+## [2.2.0](https://github.com/nartc/ngrx-slice/compare/2.1.1...2.2.0) (2021-08-26)
+
+
+### Features
+
+* **entity:** add createSliceEntityAdapter ([4d68582](https://github.com/nartc/ngrx-slice/commit/4d68582cf32152f58f9887ee2dbbb60a0ff9d71e))
+
 ### [2.1.1](https://github.com/nartc/ngrx-slice/compare/2.1.0...2.1.1) (2021-07-19)
 
 
