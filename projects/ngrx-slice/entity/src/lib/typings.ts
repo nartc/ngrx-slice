@@ -17,11 +17,11 @@ export type IdSelector<TModel> = (model: TModel) => EntityId;
 export type Comparer<TData> = (a: TData, b: TData) => number;
 
 export interface DictionaryNum<TData> {
-  [id: number]: TData | undefined;
+  [id: number]: TData;
 }
 
 export interface Dictionary<TData> extends DictionaryNum<TData> {
-  [id: string]: TData | undefined;
+  [id: string]: TData;
 }
 
 export interface Update<TData> {
