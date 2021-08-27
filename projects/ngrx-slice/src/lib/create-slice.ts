@@ -20,12 +20,12 @@ function defaultSliceActionNameGetter(
 }
 
 export function noopReducer<
-  SliceState,
-  ActionProps = false
+  ActionProps = false,
+  SliceState = any
 >(): ActionProps extends false
   ? (state: Draft<SliceState>) => void
   : (state: Draft<SliceState>, action: PayloadAction<ActionProps>) => void {
-  return (state: Draft<SliceState>) => state;
+  return () => {};
 }
 
 export function createSlice<

@@ -32,7 +32,7 @@ export const {
       success: (state, action: PayloadAction<{ value: number }>) => {
         state.value = action.value;
       },
-      trigger: noopReducer<CounterState, { multiplier: number }>(),
+      trigger: noopReducer<{ multiplier: number }>(),
     },
   },
 });

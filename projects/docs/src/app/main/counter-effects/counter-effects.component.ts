@@ -153,7 +153,7 @@ import {
       . For these situations,
       <code>ngrx-slice</code>
       provides the
-      <code>noopReducer<{{ 'SliceState, ActionPayload' }}>()</code>
+      <code>noopReducer<{{ 'ActionPayload, SliceState' }}>()</code>
       which does nothing rather than making itself available as a generated
       action.
     </p>

@@ -3,10 +3,7 @@ import {
   noopReducer,
   PayloadAction,
 } from '../../../../../ngrx-slice/src/public-api';
-import {
-  CounterState,
-  initialState,
-} from '../../shared/data-access-counter/counter.state';
+import { initialState } from '../../shared/data-access-counter/counter.state';
 
 export const {
   CounterEffectsActions,
@@ -28,8 +25,8 @@ export const {
       success: (state, action: PayloadAction<{ value: number }>) => {
         state.value = action.value;
       },
-      trigger: noopReducer<CounterState, { multiplier: number }>(),
-      cancel: noopReducer<CounterState>(),
+      trigger: noopReducer<{ multiplier: number }>(),
+      cancel: noopReducer(),
     },
   },
 });

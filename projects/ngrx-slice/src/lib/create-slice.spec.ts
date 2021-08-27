@@ -14,24 +14,25 @@ const initialState: CounterState = {
   value: 0,
 };
 
-const { CounterActions, CounterSelectors, CounterFeature } = createNamespacedSlice({
-  name: 'counter',
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.value++;
-    },
-    decrement: (state) => {
-      state.value--;
-    },
-    multiplyBy: {
-      success: (state, action: PayloadAction<{ value: number }>) => {
-        state.value = action.value;
+const { CounterActions, CounterSelectors, CounterFeature } =
+  createNamespacedSlice({
+    name: 'counter',
+    initialState,
+    reducers: {
+      increment: (state) => {
+        state.value++;
       },
-      trigger: noopReducer<CounterState, { multiplier: number }>(),
+      decrement: (state) => {
+        state.value--;
+      },
+      multiplyBy: {
+        success: (state, action: PayloadAction<{ value: number }>) => {
+          state.value = action.value;
+        },
+        trigger: noopReducer<{ multiplier: number }>(),
+      },
     },
-  },
-});
+  });
 
 describe(createNamespacedSlice.name, () => {
   it('should return correct name', () => {
@@ -68,8 +69,8 @@ describe(createNamespacedSlice.name, () => {
   });
 
   it('should noop reducers not change state', () => {
-    const noop = noopReducer<CounterState>();
-    const typedNoop = noopReducer<CounterState, { foo: 'foo' }>();
+    const noop = noopReducer();
+    const typedNoop = noopReducer<{ foo: 'foo' }>();
 
     noop(initialState);
     expect(initialState).toEqual({ value: 0, incremented: 0, decremented: 0 });
