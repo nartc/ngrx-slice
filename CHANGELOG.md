@@ -1,3 +1,37 @@
+## [3.0.0](https://github.com/nartc/ngrx-slice/compare/2.2.0...3.0.0) (2021-08-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **entity:** Dictionary no longer has undefined defined
+
+```ts
+// before
+state.entities[id]; // returns entity or undefined
+
+// after
+state.entities[id]; // returns entity 
+```
+
+You should make sure that it is `IMPOSSIBLE` to access the entity at some given `id` if the `entity` is undefined. Eg: via UI, undefined entity shouldn't be rendered.
+
+* noopReducer usage has been simplified. The type parameters (`ActionProps` and `SliceState`) have been switched
+
+```ts
+// before
+noopReducer<TodoState, { filter: Filter }>();
+noopReducer<TodoState>();
+
+// after
+noopReducer<{filter: Filter}>();
+noopReducer();
+```
+
+### Bug Fixes
+
+* adjust noopReducer implementation ([34d65c3](https://github.com/nartc/ngrx-slice/commit/34d65c390fb18535b53ce9aadc27fe8009c605d6))
+* **entity:** remove undefined from Dictionary type ([fa538eb](https://github.com/nartc/ngrx-slice/commit/fa538eb16327b1f33b925139aba315ded48f5ecf))
+
 ## [2.2.0](https://github.com/nartc/ngrx-slice/compare/2.1.1...2.2.0) (2021-08-26)
 
 
