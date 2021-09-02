@@ -1,8 +1,14 @@
 import { createNamespacedSlice, noopReducer } from './create-slice';
 import { PayloadAction } from './typings';
-import { capitalize } from './utils';
+import { classify } from './utils';
 
 interface CounterState {
+  value: number;
+  incremented: number;
+  decremented: number;
+}
+
+interface MyCounterState {
   value: number;
   incremented: number;
   decremented: number;
@@ -18,6 +24,32 @@ const { CounterActions, CounterSelectors, CounterFeature } =
   createNamespacedSlice({
     name: 'counter',
     initialState,
+    reducers: {
+      increment: (state) => {
+        state.value++;
+      },
+      decrement: (state) => {
+        state.value--;
+      },
+      multiplyBy: {
+        success: (state, action: PayloadAction<{ value: number }>) => {
+          state.value = action.value;
+        },
+        trigger: noopReducer<{ multiplier: number }>(),
+      },
+    },
+  });
+
+const myInitialState: MyCounterState = {
+  decremented: 0,
+  incremented: 0,
+  value: 0,
+};
+
+const { MyCounterActions, MyCounterFeature, MyCounterSelectors } =
+  createNamespacedSlice({
+    name: 'my-counter',
+    initialState: myInitialState,
     reducers: {
       increment: (state) => {
         state.value++;
@@ -60,7 +92,7 @@ describe(createNamespacedSlice.name, () => {
 
       ['value', 'incremented', 'decremented'].forEach((key) => {
         expect(
-          (CounterSelectors as any)[`select${capitalize(key)}`]({
+          (CounterSelectors as any)[`select${classify(key)}`]({
             counter: initialState,
           })
         ).toEqual((initialState as any)[key]);
@@ -77,5 +109,15 @@ describe(createNamespacedSlice.name, () => {
 
     typedNoop(initialState, CounterActions.increment());
     expect(initialState).toEqual({ value: 0, incremented: 0, decremented: 0 });
+  });
+
+  it('should return correct complex feature name', () => {
+    expect(MyCounterFeature.name).toEqual('my-counter');
+    expect(MyCounterFeature.reducer).toBeTruthy();
+    expect(MyCounterActions).toBeTruthy();
+    expect(MyCounterSelectors.selectMyCounterState).toBeTruthy();
+    expect(MyCounterSelectors.selectDecremented).toBeTruthy();
+    expect(MyCounterSelectors.selectIncremented).toBeTruthy();
+    expect(MyCounterSelectors.selectValue).toBeTruthy();
   });
 });

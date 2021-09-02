@@ -10,13 +10,13 @@ import type {
   SliceCaseReducers,
   SliceOptions,
 } from './typings';
-import { capitalize } from './utils';
+import { classify } from './utils';
 
 function defaultSliceActionNameGetter(
   featureName: string,
   actionName: string
 ): string {
-  return `[${capitalize(featureName)}] ${actionName}`;
+  return `[${classify(featureName)}] ${actionName}`;
 }
 
 export function noopReducer<
@@ -70,7 +70,7 @@ export function createSlice<
     reducer,
     actions,
     selectors: {
-      [`select${capitalize(name)}State`]: featureSelector,
+      [`select${classify(name)}State`]: featureSelector,
       ...nestedSelectors,
     } as Slice<AppState, SliceName, SliceState, CaseReducers>['selectors'],
   };
@@ -107,11 +107,11 @@ export function createNamespacedSlice<
   });
 
   return {
-    [`${capitalize(name)}Feature`]: {
+    [`${classify(name)}Feature`]: {
       name: sliceName,
       reducer,
     },
-    [`${capitalize(name)}Actions`]: actions,
-    [`${capitalize(name)}Selectors`]: selectors,
+    [`${classify(name)}Actions`]: actions,
+    [`${classify(name)}Selectors`]: selectors,
   } as NamespacedSlice<AppState, SliceName, SliceState, CaseReducers>;
 }

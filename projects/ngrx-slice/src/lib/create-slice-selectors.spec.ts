@@ -1,6 +1,6 @@
 import { createFeatureSelector } from '@ngrx/store';
 import { createSliceSelectors } from './create-slice-selectors';
-import { capitalize } from './utils';
+import { classify } from './utils';
 
 describe(createSliceSelectors.name, () => {
   it('should create selectors', () => {
@@ -21,7 +21,7 @@ describe(createSliceSelectors.name, () => {
     expect(Object.keys(selectors).length).toEqual(3);
     Object.keys(initialState).forEach((stateKey) => {
       expect(
-        (selectors as Record<string, unknown>)[`select${capitalize(stateKey)}`]
+        (selectors as Record<string, unknown>)[`select${classify(stateKey)}`]
       ).toBeTruthy();
     });
   });
@@ -36,5 +36,5 @@ describe(createSliceSelectors.name, () => {
     const featureSelector = createFeatureSelector('counter');
     const selectors = createSliceSelectors(0, featureSelector);
     expect(Object.keys(selectors).length).toEqual(0);
-  })
+  });
 });

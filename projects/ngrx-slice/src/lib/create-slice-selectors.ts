@@ -1,7 +1,7 @@
 import type { MemoizedSelector } from '@ngrx/store';
 import { createSelector } from '@ngrx/store';
 import type { NestedSelectors } from './typings';
-import { capitalize, isDictionary } from './utils';
+import { classify, isDictionary } from './utils';
 
 export function createSliceSelectors<
   AppState extends Record<string, any>,
@@ -17,7 +17,7 @@ export function createSliceSelectors<
   return nestedKeys.reduce(
     (nestedSelectors, nestedKey) => ({
       ...nestedSelectors,
-      [`select${capitalize(nestedKey)}`]: createSelector(
+      [`select${classify(nestedKey)}`]: createSelector(
         featureSelector,
         (parentState) => parentState[nestedKey]
       ),

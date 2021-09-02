@@ -7,6 +7,53 @@ import type {
 } from '@ngrx/store';
 import type { Draft } from 'immer';
 
+export type WordSeparators = '-' | '_' | ' ';
+
+export type Split<
+  S extends string,
+  Delimiter extends string
+> = S extends `${infer Head}${Delimiter}${infer Tail}`
+  ? [Head, ...Split<Tail, Delimiter>]
+  : S extends Delimiter
+  ? []
+  : [S];
+
+type InnerCamelCaseStringArray<
+  Parts extends readonly any[],
+  PreviousPart
+> = Parts extends [`${infer FirstPart}`, ...infer RemainingParts]
+  ? FirstPart extends undefined
+    ? ''
+    : FirstPart extends ''
+    ? InnerCamelCaseStringArray<RemainingParts, PreviousPart>
+    : `${PreviousPart extends ''
+        ? FirstPart
+        : Capitalize<FirstPart>}${InnerCamelCaseStringArray<
+        RemainingParts,
+        FirstPart
+      >}`
+  : '';
+
+type CamelCaseStringArray<Parts extends readonly string[]> = Parts extends [
+  `${infer FirstPart}`,
+  ...infer RemainingParts
+]
+  ? Uncapitalize<`${FirstPart}${InnerCamelCaseStringArray<
+      RemainingParts,
+      FirstPart
+    >}`>
+  : never;
+
+export type CamelCase<K> = K extends string
+  ? CamelCaseStringArray<
+      Split<K extends Uppercase<K> ? Lowercase<K> : K, WordSeparators>
+    >
+  : K;
+
+export type ClassifiedCase<Value> = CamelCase<Value> extends string
+  ? Capitalize<CamelCase<Value>>
+  : CamelCase<Value>;
+
 export type Primitive = string | number | bigint | boolean | null | undefined;
 
 export interface SliceActionNameGetter {
@@ -58,7 +105,7 @@ export type SliceSelector<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName]
 > = {
-  [K in SliceName as `select${Capitalize<K>}State`]: MemoizedSelector<
+  [K in SliceName as `select${ClassifiedCase<K>}State`]: MemoizedSelector<
     AppState,
     SliceState
   >;
@@ -71,7 +118,7 @@ export type NestedSelectors<
   ? Record<string, never>
   : {
       [K in keyof SliceState &
-        string as `select${Capitalize<K>}`]: MemoizedSelector<
+        string as `select${ClassifiedCase<K>}`]: MemoizedSelector<
         AppState,
         SliceState[K]
       >;
@@ -114,7 +161,7 @@ export interface Slice<
   SliceName extends keyof AppState & string,
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
-  > {
+> {
   name: SliceName;
   reducer: ActionReducer<SliceState>;
   actions: SliceActions<SliceState, CaseReducers>;
@@ -128,7 +175,7 @@ export type SliceActionsReturn<
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
 > = {
-  [ActionKey in SliceName as `${Capitalize<ActionKey>}Actions`]: SliceActions<
+  [ActionKey in SliceName as `${ClassifiedCase<ActionKey>}Actions`]: SliceActions<
     SliceState,
     CaseReducers
   >;
@@ -140,7 +187,7 @@ export type SliceSelectorsReturn<
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
 > = {
-  [SelectorsKey in SliceName as `${Capitalize<SelectorsKey>}Selectors`]: SliceSelector<
+  [SelectorsKey in SliceName as `${ClassifiedCase<SelectorsKey>}Selectors`]: SliceSelector<
     AppState,
     SliceName,
     SliceState
@@ -154,7 +201,7 @@ export type SliceFeatureReturn<
   SliceState extends AppState[SliceName],
   CaseReducers extends SliceCaseReducers<SliceState>
 > = {
-  [FeatureKey in SliceName as `${Capitalize<FeatureKey>}Feature`]: {
+  [FeatureKey in SliceName as `${ClassifiedCase<FeatureKey>}Feature`]: {
     name: SliceName;
     reducer: ActionReducer<SliceState>;
   };

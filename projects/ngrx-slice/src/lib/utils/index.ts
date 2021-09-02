@@ -1,2 +1,2 @@
-export * from './capitalize';
 export * from './is-dictionary';
+export * from './strings';
