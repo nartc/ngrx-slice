@@ -1,3 +1,10 @@
+## [3.1.0](https://github.com/nartc/ngrx-slice/compare/3.0.0...3.1.0) (2021-09-02)
+
+
+### Features
+
+* port strings utils from angular to support classify instead of capitalize ([4e1e4cb](https://github.com/nartc/ngrx-slice/commit/4e1e4cb20402b606b96ec64698fab6384f234bf3))
+
 ## [3.0.0](https://github.com/nartc/ngrx-slice/compare/2.2.0...3.0.0) (2021-08-27)
 
 
