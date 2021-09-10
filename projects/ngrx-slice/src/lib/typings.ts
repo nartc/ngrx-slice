@@ -60,7 +60,7 @@ export interface SliceActionNameGetter {
   (featureName: string, actionName: string): string;
 }
 
-export declare type PayloadAction<Payload = any> = {
+export type PayloadAction<Payload = any> = {
   [PayloadKey in keyof Payload]: Payload[PayloadKey];
 } & {
   _payload: Payload;
@@ -151,8 +151,8 @@ export type ActionCreatorForCaseReducer<SliceState, Reducer> =
   ) => void
     ? ReducerAction extends { _payload: infer ActionPayload }
       ? (payload: ActionPayload) => PayloadAction<ActionPayload>
-      : () => PayloadAction<never>
-    : () => PayloadAction<never>) & {
+      : () => PayloadAction
+    : () => PayloadAction) & {
     type: string;
   };
 

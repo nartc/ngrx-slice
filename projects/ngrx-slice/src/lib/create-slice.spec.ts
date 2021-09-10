@@ -107,7 +107,11 @@ describe(createNamespacedSlice.name, () => {
     noop(initialState);
     expect(initialState).toEqual({ value: 0, incremented: 0, decremented: 0 });
 
-    typedNoop(initialState, CounterActions.increment());
+    typedNoop(initialState, {
+      type: 'a',
+      foo: 'foo',
+      _payload: { foo: 'foo' },
+    });
     expect(initialState).toEqual({ value: 0, incremented: 0, decremented: 0 });
   });
 
