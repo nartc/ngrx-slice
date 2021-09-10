@@ -1,3 +1,10 @@
+### [3.1.1](https://github.com/nartc/ngrx-slice/compare/3.1.0...3.1.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* PayloadAction type ([62e56e6](https://github.com/nartc/ngrx-slice/commit/62e56e65a5d1e16b3721d77934824e45b0521841))
+
 ## [3.1.0](https://github.com/nartc/ngrx-slice/compare/3.0.0...3.1.0) (2021-09-02)
 
 
