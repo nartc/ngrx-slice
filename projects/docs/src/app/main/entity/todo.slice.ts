@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { createSlice, PayloadAction } from 'ngrx-slice';
+import { createSlice } from 'ngrx-slice';
 import { createSliceEntityAdapter } from 'ngrx-slice/entity';
 
 export interface Todo {
@@ -21,14 +21,7 @@ export const {
   initialState: todoAdapter.getInitialState(),
   reducers: {
     todoAdded: todoAdapter.addOne,
-    toggleComplete: (state, { todo }: PayloadAction<{ todo: Todo }>) => {
-      todoAdapter.updateOne(state, {
-        id: todo.id,
-        changes: {
-          isCompleted: !todo.isCompleted,
-        },
-      });
-    },
+    toggleComplete: todoAdapter.updateOne,
   },
 });
 

@@ -32,7 +32,11 @@ export function createStateOperator<TData, TArg>(
     const runMutator = (draft: EntityState<TData>) => {
       if (isPayloadActionArg(arg)) {
         const { type: _removedType, _payload: _removedPayload, ...rest } = arg;
-        mutator(Object.values(rest).pop(), draft);
+        if (Object.keys(rest).length > 1) {
+          mutator(rest as TArg, draft);
+        } else {
+          mutator(Object.values(rest).pop(), draft);
+        }
       } else {
         mutator(arg, draft);
       }

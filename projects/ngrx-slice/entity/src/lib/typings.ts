@@ -138,7 +138,7 @@ export interface EntityStateAdapter<TData> {
 
   updateOne<TState extends EntityState<TData>>(
     state: PreventAny<TState, TData>,
-    action: PayloadAction<{ update: Update<TData> }>
+    action: PayloadAction<Update<TData>>
   ): TState;
 
   updateMany<TState extends EntityState<TData>>(

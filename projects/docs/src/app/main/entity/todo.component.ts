@@ -108,6 +108,13 @@ export class TodoComponent {
   }
 
   toggleComplete(todo: Todo) {
-    this.store.dispatch(TodoActions.toggleComplete({ todo }));
+    this.store.dispatch(
+      TodoActions.toggleComplete({
+        id: todo.id,
+        changes: {
+          isCompleted: !todo.isCompleted,
+        },
+      })
+    );
   }
 }
