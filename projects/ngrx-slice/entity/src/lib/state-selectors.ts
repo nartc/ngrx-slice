@@ -1,12 +1,3 @@
-// import { createDraftSafeSelector } from '../createDraftSafeSelector'
-// import type {
-//   EntityState,
-//   EntitySelectors,
-//   Dictionary,
-//   EntityId,
-// } from './models'
-//
-
 import { createSelector } from '@ngrx/store';
 import type {
   Dictionary,

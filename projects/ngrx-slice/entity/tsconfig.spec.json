@@ -12,6 +12,7 @@
   ],
   "include": [
     "**/*.spec.ts",
+    "**/*.spec.fixture.ts",
     "**/*.d.ts"
   ]
 }

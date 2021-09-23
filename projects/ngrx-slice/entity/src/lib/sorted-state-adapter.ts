@@ -143,6 +143,7 @@ export function createSortedStateAdapter<TData>(
     });
 
     const allEntities = Object.values(state.entities) as TData[];
+
     allEntities.sort(sortComparer);
 
     const newSortedIds = allEntities.map(selectId);

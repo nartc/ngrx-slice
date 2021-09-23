@@ -37,6 +37,22 @@
         }
       }
     },
+    "ngrx-slice-entity": {
+      "projectType": "library",
+      "root": "projects/ngrx-slice/entity",
+      "sourceRoot": "projects/ngrx-slice/entity/src",
+      "prefix": "lib",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngrx-slice/entity/src/test.ts",
+            "tsConfig": "projects/ngrx-slice/entity/tsconfig.spec.json",
+            "karmaConfig": "projects/ngrx-slice/entity/karma.conf.js"
+          }
+        }
+      }
+    },
     "docs": {
       "projectType": "application",
       "schematics": {

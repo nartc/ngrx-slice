@@ -1,6 +1,6 @@
 import type { EntityState } from './typings';
 
-export function getInitialEntityState<TState>(): EntityState<TState> {
+function getInitialEntityState<TState>(): EntityState<TState> {
   return {
     ids: [],
     entities: {},
