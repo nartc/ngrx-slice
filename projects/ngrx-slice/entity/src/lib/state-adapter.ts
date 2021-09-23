@@ -26,7 +26,7 @@ export function createStateOperator<TData, TArg>(
     function isPayloadActionArg(
       arg: TArg | PayloadAction
     ): arg is PayloadAction {
-      return 'type' in arg;
+      return typeof arg === 'object' && 'type' in arg;
     }
 
     const runMutator = (draft: EntityState<TData>) => {
