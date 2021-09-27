@@ -6,8 +6,10 @@ const getter = (featureName: string, actionName: string) =>
   featureName + '/' + actionName;
 
 describe(createSliceActions.name, () => {
-  it('should return empty {} if reducers is empty', () => {
-    expect(createSliceActions('feature', getter, {})).toEqual({});
+  it('should return {noop} if reducers is empty', () => {
+    expect(createSliceActions('feature', getter, {})).toEqual({
+      noop: jasmine.any(Function),
+    });
   });
 
   it('should return actions for case reducers', () => {
@@ -15,7 +17,8 @@ describe(createSliceActions.name, () => {
       foo: (state) => state,
       bar: (state) => state,
     });
-    expect(Object.keys(actions).length).toEqual(2);
+
+    expect(Object.keys(actions).length).toEqual(3);
     ['foo', 'bar'].forEach((key) => {
       expect((actions as Record<string, Function>)[key]).toBeTruthy();
       expect((actions as Record<string, Function>)[key]()).toEqual({
@@ -36,7 +39,7 @@ describe(createSliceActions.name, () => {
       },
     });
 
-    expect(Object.keys(actions).length).toEqual(2);
+    expect(Object.keys(actions).length).toEqual(3);
     ['foo', 'bar'].forEach((key) => {
       const action = (actions as Record<string, any>)[key];
       expect(action).toBeTruthy();
@@ -59,7 +62,7 @@ describe(createSliceActions.name, () => {
       },
     });
 
-    expect(Object.keys(actions).length).toEqual(2);
+    expect(Object.keys(actions).length).toEqual(3);
     ['foo', 'bar'].forEach((key) => {
       const action = (actions as Record<string, any>)[key];
       expect(action).toBeTruthy();

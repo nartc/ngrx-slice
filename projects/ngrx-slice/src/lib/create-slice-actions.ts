@@ -18,6 +18,11 @@ export function createSliceActions<
   const actions: Record<string, ActionCreator | Record<string, ActionCreator>> =
     {};
 
+  actions['noop'] = createAction(
+    sliceActionNameGetter(featureName, 'noop effect'),
+    props<Record<string, unknown>>()
+  );
+
   for (const [reducerKey, reducerValue] of Object.entries(reducers)) {
     const typeOfReducer = typeof reducerValue;
     const sliceActionName = sliceActionNameGetter(featureName, reducerKey);

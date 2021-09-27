@@ -128,7 +128,9 @@ export type SliceActions<
   SliceState,
   CaseReducers extends SliceCaseReducers<SliceState>
 > = {
-  [Type in keyof CaseReducers]: CaseReducers[Type] extends AsyncCaseReducer<SliceState>
+  [Type in keyof CaseReducers | 'noop']: Type extends 'noop'
+    ? ActionCreatorForCaseReducer<SliceState, null>
+    : CaseReducers[Type] extends AsyncCaseReducer<SliceState>
     ? ActionCreatorForAsyncCaseReducer<SliceState, CaseReducers[Type]>
     : ActionCreatorForCaseReducer<SliceState, CaseReducers[Type]>;
 };
