@@ -1,3 +1,32 @@
+## [4.0.0](https://github.com/nartc/ngrx-slice/compare/3.1.1...4.0.0) (2021-09-27)
+
+
+### Features
+
+* add noop() to actions for triggering effects ([55a1df7](https://github.com/nartc/ngrx-slice/commit/55a1df71cd3721099a19628da724cb9679f160ab))
+* **entity:** simplify `updateOne` usage ([62e0619](https://github.com/nartc/ngrx-slice/commit/62e061988cccafcf93c2d8c834001b394d787905))
+
+### ⚠ BREAKING CHANGES: `updateOne` now accepts `Update<TModel>` instead of `{ update: Update<TModel> }`
+```ts
+// before
+TodoActions.toggleComplete({
+    update: {
+        id: todo.id,
+        changes: { completed: !todo.completed }
+    }
+});
+
+// after
+TodoActions.toggleComplete({
+    id: todo.id,
+    changes: { completed: !todo.completed }
+});
+```
+
+### Bug Fixes
+
+* **entity:** check if arg is object for payloadAction ([eb8bfbb](https://github.com/nartc/ngrx-slice/commit/eb8bfbb51b6b3c83910edcd1fcfb086cf74eb216))
+
 ### [3.1.1](https://github.com/nartc/ngrx-slice/compare/3.1.0...3.1.1) (2021-09-10)
 
 
