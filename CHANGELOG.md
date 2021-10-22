@@ -1,3 +1,39 @@
+## [5.0.0](https://github.com/nartc/ngrx-slice/compare/4.0.0...5.0.0) (2021-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* generated actions for AsyncCaseReducer are now
+correctly generated with the type of cases provided, not all 5
+
+```ts
+const { actions } = createSlice({
+  name: 'foo',
+  initialState,
+  reducers: {
+    foo: {
+      success: state => state,
+      trigger: noopReducer()
+    }
+  }
+});
+
+// before
+assert(Object.keys(actions.foo).length === 5); // Actions for all 5 cases are generated 
+
+// after
+assert(Object.keys(actions.foo).length === 2); // Only the "success" and "trigger" cases are generated
+```
+
+### Features
+
+* only generate correct amount of async case actions ([c250f2a](https://github.com/nartc/ngrx-slice/commit/c250f2afcae216d64e0c155e038d37d25727b15e))
+
+
+### Documentations
+
+* remove scully plugins folder ([de0a678](https://github.com/nartc/ngrx-slice/commit/de0a67812616a7e297ffc50b32aed2650c652745))
+
 ## [4.0.0](https://github.com/nartc/ngrx-slice/compare/3.1.1...4.0.0) (2021-09-27)
 
 

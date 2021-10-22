@@ -1,6 +1,6 @@
 {
   "name": "ngrx-slice/entity",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "license": "MIT",
   "description": "createSlice Entity plugin for NgRX"
 }
