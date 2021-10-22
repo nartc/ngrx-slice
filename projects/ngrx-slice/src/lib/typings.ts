@@ -135,15 +135,11 @@ export type SliceActions<
     : ActionCreatorForCaseReducer<SliceState, CaseReducers[Type]>;
 };
 
-export interface ActionCreatorForAsyncCaseReducer<
+export type ActionCreatorForAsyncCaseReducer<
   SliceState,
   AsyncReducer extends AsyncCaseReducer<SliceState>
-> {
-  success: ActionCreatorForCaseReducer<SliceState, AsyncReducer['success']>;
-  failure: ActionCreatorForCaseReducer<SliceState, AsyncReducer['failure']>;
-  trigger: ActionCreatorForCaseReducer<SliceState, AsyncReducer['trigger']>;
-  clear: ActionCreatorForCaseReducer<SliceState, AsyncReducer['clear']>;
-  cancel: ActionCreatorForCaseReducer<SliceState, AsyncReducer['cancel']>;
+> = {
+  [AsyncKey in keyof AsyncReducer]: ActionCreatorForCaseReducer<SliceState, AsyncReducer[AsyncKey]>;
 }
 
 export type ActionCreatorForCaseReducer<SliceState, Reducer> =

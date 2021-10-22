@@ -1,4 +1,3 @@
-import { ASYNC_ACTIONS } from './constants';
 import { createSliceActions } from './create-slice-actions';
 import { PayloadAction } from './typings';
 
@@ -43,9 +42,9 @@ describe(createSliceActions.name, () => {
     ['foo', 'bar'].forEach((key) => {
       const action = (actions as Record<string, any>)[key];
       expect(action).toBeTruthy();
-      expect(Object.keys(action).length).toEqual(5);
+      expect(Object.keys(action).length).toEqual(2);
 
-      ASYNC_ACTIONS.forEach((actionKey) => {
+      Object.keys(action).forEach((actionKey) => {
         expect(action[actionKey]()).toEqual({
           type: `feature/${key} ${actionKey}`,
         });
