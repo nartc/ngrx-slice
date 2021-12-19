@@ -1,3 +1,24 @@
+## [6.0.0](https://github.com/nartc/ngrx-slice/compare/5.0.0...6.0.0) (2021-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Angular 13
+
+### Features
+
+* upgrade Angular 13 ([308414d](https://github.com/nartc/ngrx-slice/commit/308414dc2fbace6dafd740bb599ccc2cc6b5bdc1))
+
+
+### Bug Fixes
+
+* adjust slice and entity to ngrx13 ([4295601](https://github.com/nartc/ngrx-slice/commit/42956011e2218b2bf2c8a3289a9400479a926e41))
+
+
+### Documentations
+
+* update peer dependencies ([9c46e4b](https://github.com/nartc/ngrx-slice/commit/9c46e4b193c28232cb7f8334262afd73468f863c))
+
 ## [5.0.0](https://github.com/nartc/ngrx-slice/compare/4.0.0...5.0.0) (2021-10-22)
 
 
