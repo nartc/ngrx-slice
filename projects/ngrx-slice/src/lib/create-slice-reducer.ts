@@ -11,9 +11,8 @@ import type {
 } from './typings';
 
 export function createSliceReducer<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string = keyof AppState & string,
-  SliceState extends AppState[SliceName] = AppState[SliceName],
+  SliceState extends object,
+  SliceName extends string = string,
   CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
 >(
   initialState: SliceState,

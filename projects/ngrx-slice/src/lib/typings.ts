@@ -54,7 +54,13 @@ export type ClassifiedCase<Value> = CamelCase<Value> extends string
   ? Capitalize<CamelCase<Value>>
   : CamelCase<Value>;
 
-export type Primitive = string | number | bigint | boolean | null | undefined;
+export type Primitive =
+  | string
+  | number
+  | BigInteger
+  | boolean
+  | null
+  | undefined;
 
 export interface SliceActionNameGetter {
   (featureName: string, actionName: string): string;
@@ -101,25 +107,24 @@ export interface SliceOptions<
 }
 
 export type SliceSelector<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName]
+  SliceState extends object,
+  SliceName extends string = string
 > = {
   [K in SliceName as `select${ClassifiedCase<K>}State`]: MemoizedSelector<
-    AppState,
+    object,
     SliceState
   >;
 };
 
-export type NestedSelectors<
-  AppState extends Record<string, any>,
-  SliceState
-> = SliceState extends Primitive | unknown[] | Date
+export type NestedSelectors<SliceState extends object> = SliceState extends
+  | Primitive
+  | unknown[]
+  | Date
   ? Record<string, never>
   : {
       [K in keyof SliceState &
         string as `select${ClassifiedCase<K>}`]: MemoizedSelector<
-        AppState,
+        object,
         SliceState[K]
       >;
     };
@@ -139,8 +144,11 @@ export type ActionCreatorForAsyncCaseReducer<
   SliceState,
   AsyncReducer extends AsyncCaseReducer<SliceState>
 > = {
-  [AsyncKey in keyof AsyncReducer]: ActionCreatorForCaseReducer<SliceState, AsyncReducer[AsyncKey]>;
-}
+  [AsyncKey in keyof AsyncReducer]: ActionCreatorForCaseReducer<
+    SliceState,
+    AsyncReducer[AsyncKey]
+  >;
+};
 
 export type ActionCreatorForCaseReducer<SliceState, Reducer> =
   (Reducer extends (
@@ -155,22 +163,19 @@ export type ActionCreatorForCaseReducer<SliceState, Reducer> =
   };
 
 export interface Slice<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
+  SliceState extends object,
+  SliceName extends string,
   CaseReducers extends SliceCaseReducers<SliceState>
 > {
   name: SliceName;
   reducer: ActionReducer<SliceState>;
   actions: SliceActions<SliceState, CaseReducers>;
-  selectors: SliceSelector<AppState, SliceName, SliceState> &
-    NestedSelectors<AppState, SliceState>;
+  selectors: SliceSelector<SliceState, SliceName> & NestedSelectors<SliceState>;
 }
 
 export type SliceActionsReturn<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
+  SliceState extends object,
+  SliceName extends string,
   CaseReducers extends SliceCaseReducers<SliceState>
 > = {
   [ActionKey in SliceName as `${ClassifiedCase<ActionKey>}Actions`]: SliceActions<
@@ -180,23 +185,20 @@ export type SliceActionsReturn<
 };
 
 export type SliceSelectorsReturn<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
+  SliceState extends object,
+  SliceName extends string,
   CaseReducers extends SliceCaseReducers<SliceState>
 > = {
   [SelectorsKey in SliceName as `${ClassifiedCase<SelectorsKey>}Selectors`]: SliceSelector<
-    AppState,
-    SliceName,
-    SliceState
+    SliceState,
+    SliceName
   > &
-    NestedSelectors<AppState, SliceState>;
+    NestedSelectors<SliceState>;
 };
 
 export type SliceFeatureReturn<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
+  SliceState extends object,
+  SliceName extends string,
   CaseReducers extends SliceCaseReducers<SliceState>
 > = {
   [FeatureKey in SliceName as `${ClassifiedCase<FeatureKey>}Feature`]: {
@@ -206,10 +208,9 @@ export type SliceFeatureReturn<
 };
 
 export type NamespacedSlice<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
+  SliceState extends object,
+  SliceName extends string,
   CaseReducers extends SliceCaseReducers<SliceState>
-> = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
-  SliceSelectorsReturn<AppState, SliceName, SliceState, CaseReducers> &
-  SliceFeatureReturn<AppState, SliceName, SliceState, CaseReducers>;
+> = SliceActionsReturn<SliceState, SliceName, CaseReducers> &
+  SliceSelectorsReturn<SliceState, SliceName, CaseReducers> &
+  SliceFeatureReturn<SliceState, SliceName, CaseReducers>;

@@ -5,11 +5,11 @@ import {
   writeSliceTodo,
   writeTestTodo,
 } from './todo.spec.fixture';
-import { EntityState, EntityStateAdapter } from './typings';
+import { EntityAdapter, EntityState } from './typings';
 import { createUnsortedStateAdapter } from './unsorted-state-adapter';
 
 describe(createUnsortedStateAdapter.name, () => {
-  let adapter: EntityStateAdapter<Todo>;
+  let adapter: EntityAdapter<Todo>;
   let state: EntityState<Todo>;
 
   beforeEach(() => {

@@ -13,10 +13,10 @@ describe(createSliceSelectors.name, () => {
     const featureSelector =
       createFeatureSelector<typeof initialState>('counter');
 
-    const selectors = createSliceSelectors<
-      Record<string, any>,
-      typeof initialState
-    >(initialState, featureSelector);
+    const selectors = createSliceSelectors<typeof initialState>(
+      initialState,
+      featureSelector
+    );
 
     expect(Object.keys(selectors).length).toEqual(3);
     Object.keys(initialState).forEach((stateKey) => {
@@ -27,14 +27,14 @@ describe(createSliceSelectors.name, () => {
   });
 
   it('should return empty {} for empty state', () => {
-    const featureSelector = createFeatureSelector('counter');
+    const featureSelector = createFeatureSelector<object>('counter');
     const selectors = createSliceSelectors({}, featureSelector);
     expect(Object.keys(selectors).length).toEqual(0);
   });
 
   it('should return empty {} for non object state', () => {
-    const featureSelector = createFeatureSelector('counter');
-    const selectors = createSliceSelectors(0, featureSelector);
+    const featureSelector = createFeatureSelector<object>('counter');
+    const selectors = createSliceSelectors(0 as any, featureSelector);
     expect(Object.keys(selectors).length).toEqual(0);
   });
 });

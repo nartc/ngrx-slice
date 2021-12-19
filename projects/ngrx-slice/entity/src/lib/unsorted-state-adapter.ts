@@ -194,5 +194,5 @@ export function createUnsortedStateAdapter<TData>(
     upsertMany: createStateOperator(upsertManyMutably),
     removeOne: createStateOperator(removeOneMutably),
     removeMany: createStateOperator(removeManyMutably),
-  };
+  } as EntityStateAdapter<TData>;
 }

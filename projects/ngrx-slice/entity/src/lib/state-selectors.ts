@@ -31,7 +31,7 @@ export function createSelectorsFactory<TData>() {
         selectEntities,
         selectAll,
         selectTotal,
-      };
+      } as EntitySelectors<TData, any>;
     }
 
     return {
@@ -39,7 +39,7 @@ export function createSelectorsFactory<TData>() {
       selectEntities: createSelector(selectState, selectEntities),
       selectAll: createSelector(selectState, selectAll),
       selectTotal: createSelector(selectState, selectTotal),
-    };
+    } as EntitySelectors<TData, any>;
   }
 
   return { getSelectors };

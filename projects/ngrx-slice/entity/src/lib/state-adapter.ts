@@ -12,7 +12,7 @@ export function createSingleArgumentStateOperator<TData>(
   return function operation<TState extends EntityState<TData>>(
     state: PreventAny<TState, TData>
   ): TState {
-    return operator(state as TState, undefined);
+    return operator(state as TState, undefined) as TState;
   };
 }
 

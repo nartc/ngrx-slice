@@ -167,5 +167,5 @@ export function createSortedStateAdapter<TData>(
     addMany: createStateOperator(addManyMutably),
     updateMany: createStateOperator(updateManyMutably),
     upsertMany: createStateOperator(upsertManyMutably),
-  };
+  } as EntityStateAdapter<TData>;
 }
