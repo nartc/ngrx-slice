@@ -111,130 +111,45 @@ const selectDecrement = createSelector(
   selectCounterState,
   (state) => state.decrement
 );
-
-// Module
-@NgModule({
-  imports: [
-    StoreModule.forFeature({ name: "counter", reducer: counterReducer }),
-  ],
-})
-export class CounterModule {}
 ```
 
 > There is an `Effect` that will handle `multiplyBy` action but this will be the same for `ngrx-slice` as well.
 
-## API
-
-### `createSlice`
+Or you can have everything in a Slice
 
 ```ts
-export interface SliceOptions<
-  SliceName extends string,
-  SliceState,
-  CaseReducers extends SliceCaseReducers<SliceState>
-> {
-  name: SliceName;
-  initialState: SliceState;
-  reducers: CaseReducers;
-  extraReducers?: Array<ReducerTypes<SliceState, readonly ActionCreator[]>>;
-  sliceActionNameGetter?: SliceActionNameGetter;
+import { createSlice } from 'ngrx-slice';
+
+export interface CounterState {
+  value: number;
+  incrementCount: number;
+  decrementCount: number;
 }
 
-export interface Slice<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState>
-> {
-  name: SliceName;
-  reducer: ActionReducer<SliceState>;
-  actions: SliceActions<SliceState, CaseReducers>;
-  selectors: SliceSelector<AppState, SliceName, SliceState> &
-    NestedSelectors<AppState, SliceState>;
-}
-
-export type SliceActionsReturn<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState>
-> = {
-  [ActionKey in SliceName as `${Capitalize<ActionKey>}Actions`]: SliceActions<
-    SliceState,
-    CaseReducers
-  >;
+export const initialState: CounterState = {
+  decrementCount: 0,
+  incrementCount: 0,
+  value: 0,
 };
 
-export type SliceSelectorsReturn<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState>
-> = {
-  [SelectorsKey in SliceName as `${Capitalize<SelectorsKey>}Selectors`]: SliceSelector<
-    AppState,
-    SliceName,
-    SliceState
-  > &
-    NestedSelectors<AppState, SliceState>;
-};
-
-export type SliceFeatureReturn<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState>
-> = {
-  [FeatureKey in SliceName as `${Capitalize<FeatureKey>}Feature`]: {
-    name: SliceName;
-    reducer: ActionReducer<SliceState>;
-  };
-};
-
-export type NamespacedSlice<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string,
-  SliceState extends AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState>
-> = SliceActionsReturn<AppState, SliceName, SliceState, CaseReducers> &
-  SliceSelectorsReturn<AppState, SliceName, SliceState, CaseReducers> &
-  SliceFeatureReturn<AppState, SliceName, SliceState, CaseReducers>;
-
-export declare function createSlice<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string = keyof AppState & string,
-  SliceState extends AppState[SliceName] = AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
->({
-  name,
+export const {
+  actions: CounterActions,
+  selectors: CounterSelectors,
+  ...CounterFeature
+} = createSlice({
+  name: 'counter',
   initialState,
-  reducers,
-  extraReducers,
-  sliceActionNameGetter,
-}: SliceOptions<SliceName, SliceState, CaseReducers>): Slice<
-  AppState,
-  SliceName,
-  SliceState,
-  CaseReducers
->;
-
-export declare function createNamespacedSlice<
-  AppState extends Record<string, any>,
-  SliceName extends keyof AppState & string = keyof AppState & string,
-  SliceState extends AppState[SliceName] = AppState[SliceName],
-  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
->({
-  name,
-  initialState,
-  reducers,
-  extraReducers,
-  sliceActionNameGetter,
-}: SliceOptions<SliceName, SliceState, CaseReducers>): NamespacedSlice<
-  AppState,
-  SliceName,
-  SliceState,
-  CaseReducers
->;
+  reducers: {
+    increment: (state) => {
+      state.value++;
+      state.incrementCount++;
+    },
+    decrement: (state) => {
+      state.value--;
+      state.decrementCount++;
+    },
+  },
+});
 ```
 
 ## Contribution

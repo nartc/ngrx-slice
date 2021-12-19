@@ -7,18 +7,21 @@ import { Component } from '@angular/core';
       <table class="tui-table">
         <thead>
           <tr class="tui-table__tr">
+            <th class="tui-table__th">NgRx Slice</th>
             <th class="tui-table__th">Angular</th>
             <th class="tui-table__th">NgRX</th>
           </tr>
         </thead>
         <tbody>
           <tr class="tui-table__tr">
-            <td class="tui-table__td">12+</td>
-            <td class="tui-table__td">12+</td>
+            <td class="tui-table__td">v6</td>
+            <td class="tui-table__td">v13</td>
+            <td class="tui-table__td">v13</td>
           </tr>
           <tr class="tui-table__tr">
-            <td class="tui-table__td">11+</td>
-            <td class="tui-table__td">11+</td>
+            <td class="tui-table__td">v5</td>
+            <td class="tui-table__td">v11, v12</td>
+            <td class="tui-table__td">v11, v12</td>
           </tr>
           <tr class="tui-table__tr">
             <td class="tui-table__td" colspan="2">
