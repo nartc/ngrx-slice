@@ -1,12 +1,10 @@
-import type { MemoizedSelector } from '@ngrx/store';
-import { createSelector } from '@ngrx/store';
-import type { NestedSelectors } from './typings';
-import { classify, isDictionary } from './utils';
+import type { MemoizedSelector } from "@ngrx/store";
+import { createSelector } from "@ngrx/store";
+import type { NestedSelectors } from "./typings";
+import { classify, isDictionary } from "./utils";
 
-export function createSliceSelectors<
-  AppState extends Record<string, any>,
-  SliceState
->(
+export function createSliceSelectors<AppState extends Record<string, any>,
+  SliceState>(
   initialState: SliceState,
   featureSelector: MemoizedSelector<AppState, SliceState>
 ): NestedSelectors<AppState, SliceState> {
@@ -20,8 +18,8 @@ export function createSliceSelectors<
       [`select${classify(nestedKey)}`]: createSelector(
         featureSelector,
         (parentState) => parentState[nestedKey]
-      ),
+      )
     }),
-    {} as NestedSelectors<AppState, SliceState>
-  );
+    {}
+  ) as NestedSelectors<AppState, SliceState>;
 }

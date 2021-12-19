@@ -18,15 +18,15 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.2.11",
+    "@angular/animations": "~13.1.1",
     "@angular/cdk": "^12.2.11",
-    "@angular/common": "~12.2.11",
-    "@angular/compiler": "~12.2.11",
-    "@angular/core": "~12.2.11",
-    "@angular/forms": "~12.2.11",
-    "@angular/platform-browser": "~12.2.11",
-    "@angular/platform-browser-dynamic": "~12.2.11",
-    "@angular/router": "~12.2.11",
+    "@angular/common": "~13.1.1",
+    "@angular/compiler": "~13.1.1",
+    "@angular/core": "~13.1.1",
+    "@angular/forms": "~13.1.1",
+    "@angular/platform-browser": "~13.1.1",
+    "@angular/platform-browser-dynamic": "~13.1.1",
+    "@angular/router": "~13.1.1",
     "@ngrx/effects": "^12.5.0",
     "@ngrx/store": "^12.5.0",
     "@scullyio/init": "^2.0.1",
@@ -46,9 +46,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.11",
-    "@angular/cli": "~12.2.11",
-    "@angular/compiler-cli": "~12.2.11",
+    "@angular-devkit/build-angular": "~13.1.2",
+    "@angular/cli": "~13.1.2",
+    "@angular/compiler-cli": "~13.1.1",
     "@release-it/bumper": "^3.0.1",
     "@release-it/conventional-changelog": "^3.3.0",
     "@types/jasmine": "~3.10.0",
@@ -60,15 +60,16 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.7.0",
-    "ng-packagr": "^12.2.4",
-    "prettier": "2.4.1",
+    "ng-packagr": "^13.1.2",
+    "prettier": "2.5.1",
     "raw-loader": "^4.0.2",
     "release-it": "^14.11.6",
     "shx": "^0.3.3",
-    "typescript": "~4.3.5"
+    "typescript": "~4.5.4"
   },
   "prettier": {
     "semi": true,
-    "htmlWhitespaceSensitivity": "ignore"
+    "htmlWhitespaceSensitivity": "ignore",
+    "printWidth": 80
   }
 }

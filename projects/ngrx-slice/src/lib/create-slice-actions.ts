@@ -1,15 +1,9 @@
-import { ActionCreator, createAction, props } from '@ngrx/store';
-import type {
-  SliceActionNameGetter,
-  SliceActions,
-  SliceCaseReducers,
-} from './typings';
+import { ActionCreator, createAction, props } from "@ngrx/store";
+import type { SliceActionNameGetter, SliceActions, SliceCaseReducers } from "./typings";
 
-export function createSliceActions<
-  SliceState,
+export function createSliceActions<SliceState,
   SliceName extends string = string,
-  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>
->(
+  CaseReducers extends SliceCaseReducers<SliceState> = SliceCaseReducers<SliceState>>(
   featureName: SliceName,
   sliceActionNameGetter: SliceActionNameGetter,
   reducers: CaseReducers
@@ -17,8 +11,8 @@ export function createSliceActions<
   const actions: Record<string, ActionCreator | Record<string, ActionCreator>> =
     {};
 
-  actions['noop'] = createAction(
-    sliceActionNameGetter(featureName, 'noop effect'),
+  actions["noop"] = createAction(
+    sliceActionNameGetter(featureName, "noop effect"),
     props<Record<string, unknown>>()
   );
 
@@ -26,7 +20,7 @@ export function createSliceActions<
     const typeOfReducer = typeof reducerValue;
     const sliceActionName = sliceActionNameGetter(featureName, reducerKey);
 
-    if (typeOfReducer === 'function') {
+    if (typeOfReducer === "function") {
       actions[reducerKey] = createAction(
         sliceActionName,
         props<Record<string, unknown>>()

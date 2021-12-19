@@ -2,11 +2,6 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/ngrx-slice",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "immer": "immer",
-      "ngrx-immer/store": "ngrx-immer/store",
-      "@ngrx/store": "@ngrx/store"
-    }
+    "entryFile": "src/public-api.ts"
   }
 }
