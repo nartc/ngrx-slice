@@ -34,3 +34,20 @@ Using stored unhandled routes!.
 Using stored unhandled routes!.
    To discover new routes in the angular app use "npm run scully -- --scanRoutes"
 ----------------------------------
+Folder "./scully" doesn't seem to contain custom plugins Deprication Notice:
+       ======================================================================
+         From now on, the plugin that is being used to render a route is
+         able to be changed by the user. You can do this by adding or
+         enabling the plugin in the scully.json file. For your convenience,
+         we loaded the Puppeteer plugin for you.
+
+         To disable this warning enable the plugin of your choiche.
+         for Puppteer please add:
+             import '@scullyio/scully-plugin-puppeteer';
+          to your scully.docs.config.ts file.
+
+          When you get this waring while not using scully-plugin-puppeteer
+          you need to set the defaultRouteRenderer to the name of your plugin.
+          The defaultRouteRenderer is now set to 'routeRenderer'.
+       ======================================================================
+

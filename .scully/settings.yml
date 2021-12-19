@@ -1,2 +1,11 @@
 identifier: k4pbl5d9qef80b02
 allowErrorCollect: false
+appPort: 1864
+staticPort: 1668
+reloadPort: 2667
+hostName: localhost
+projectName: docs
+homeFolder: /Users/ctran/code/oss/ngrx-slice
+distFolder: dist/docs
+outDir: /Users/ctran/code/oss/ngrx-slice/dist/static
+handle404: ''
